@@ -14,8 +14,16 @@
   }
 }
 
+/*
+#C763F2
+#9305F2
+#F2C53D
+#D97904
+#F2F2F2
+*/
+
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: black;
+  background: white;
   font-family: Arial, Helvetica, sans-serif;
 }
