@@ -75,7 +75,7 @@ const Login = () => {
                 </form>
                 <p className="text-center mt-4">
                     Нет аккаунта?{' '}
-                    <a href="/registration" className="text-[#9305F2]">Зарегистрироваться</a>
+                    <a href="/auth/registration" className="text-[#9305F2]">Зарегистрироваться</a>
                 </p>
             </div>
         </div>
