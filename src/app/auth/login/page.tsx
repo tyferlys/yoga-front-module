@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import {useRouter} from "next/navigation";
+
 
 const Login = () => {
     const [login, setLogin] = useState('');
@@ -25,7 +26,9 @@ const Login = () => {
             if (response.ok) {
                 document.cookie = `access_token=${data.access_token}; path=/`;
 
-                router.push('/profile');
+                setTimeout(() => {
+                    router.push('/profile');
+                }, 100)
             } else {
                 setError(data.message || 'Ошибка авторизации');
             }
