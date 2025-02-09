@@ -38,7 +38,7 @@ const Login = () => {
         <div className="min-h-screen bg-[#F2F2F2] flex items-center justify-center">
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
                 <h1 className="text-2xl font-bold text-center text-[#9305F2] mb-4">Авторизация</h1>
-                <form>
+                <div>
                     <div className="mb-4">
                         <label htmlFor="login" className="block text-sm font-medium text-[#333]">Логин</label>
                         <input
@@ -70,7 +70,7 @@ const Login = () => {
                             Войти
                         </button>
                     </div>
-                </form>
+                </div>
                 <p className="text-center mt-4">
                     Нет аккаунта?{' '}
                     <a href="/auth/registration" className="text-[#9305F2]">Зарегистрироваться</a>
