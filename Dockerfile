@@ -6,7 +6,7 @@ RUN npm install --legacy-peer-deps
 FROM node:lts as builder
 WORKDIR /app
 COPY . .
-COPY --from=dependencies /<имя проекта>/node_modules ./node_modules
+COPY --from=dependencies /app/node_modules ./node_modules
 RUN npm build
 
 FROM node:lts as runner
