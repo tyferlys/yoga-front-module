@@ -28,7 +28,7 @@ const Login = () => {
 
                 setTimeout(() => {
                     router.push('/profile');
-                }, 100)
+                }, 300)
             } else {
                 setError(data.message || 'Ошибка авторизации');
             }
