@@ -10,9 +10,7 @@ const Login = () => {
     const router = useRouter();
     const hostServer = process.env.NEXT_PUBLIC_HOST_SERVER;
 
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();
-
+    const handleLogin = async () => {
         try {
             const response = await fetch(`http://${hostServer}/api/auth`, {
                 method: 'POST',
