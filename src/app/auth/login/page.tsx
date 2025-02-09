@@ -11,7 +11,9 @@ const Login = () => {
     const router = useRouter();
     const hostServer = process.env.NEXT_PUBLIC_HOST_SERVER;
 
-    const handleLogin = async () => {
+    const handleLogin = async (event: any) => {
+        event.preventDefault();
+
         try {
             const response = await fetch(`http://${hostServer}/api/auth`, {
                 method: 'POST',
@@ -27,7 +29,7 @@ const Login = () => {
                 document.cookie = `access_token=${data.access_token}; path=/`;
 
                 setTimeout(() => {
-                    router.push('/profile');
+                    await router.push('/profile');
                 }, 300)
             } else {
                 setError(data.message || 'Ошибка авторизации');
