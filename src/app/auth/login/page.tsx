@@ -28,7 +28,7 @@ const Login = () => {
             if (response.ok) {
                 document.cookie = `access_token=${data.access_token}; path=/`;
 
-                setTimeout(() => {
+                setTimeout(async () => {
                     await router.push('/profile');
                 }, 300)
             } else {
