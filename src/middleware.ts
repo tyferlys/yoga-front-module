@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
         console.log("Редирект")
         return NextResponse.redirect(new URL('/auth/login', request.url));
     }
-
+    console.log("запрос прошел")
     return NextResponse.next();
 }
 

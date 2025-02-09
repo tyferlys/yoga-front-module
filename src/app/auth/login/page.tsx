@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import {useRouter} from "next/navigation";
-
+import Cookie from "js-cookie";
 
 const Login = () => {
     const [login, setLogin] = useState('');
@@ -26,8 +26,9 @@ const Login = () => {
             const data = await response.json();
 
             if (response.ok) {
-                document.cookie = `access_token=${data.access_token}; path=/`;
-                router.push('/profile');
+                Cookie.set("access_token", data.access_token)
+                console.log("идем")
+                window.location.href = "/profile"
             } else {
                 setError(data.message || 'Ошибка авторизации');
             }
