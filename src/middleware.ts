@@ -3,6 +3,7 @@ import { NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
     if (!request.cookies.has('access_token')) {
+        console.log("Редирект")
         return NextResponse.redirect(new URL('/auth/login', request.url));
     }
 

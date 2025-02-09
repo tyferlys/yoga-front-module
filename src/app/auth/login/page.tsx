@@ -27,10 +27,7 @@ const Login = () => {
 
             if (response.ok) {
                 document.cookie = `access_token=${data.access_token}; path=/`;
-
-                setTimeout(async () => {
-                    await router.push('/profile');
-                }, 300)
+                router.push('/profile');
             } else {
                 setError(data.message || 'Ошибка авторизации');
             }
