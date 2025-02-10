@@ -27,7 +27,6 @@ const Login = () => {
 
             if (response.ok) {
                 Cookie.set("access_token", data.access_token)
-                console.log("идем")
                 window.location.href = "/profile"
             } else {
                 setError(data.message || 'Ошибка авторизации');
