@@ -3,20 +3,20 @@ import React from "react";
 
 const Header: React.FC = () => {
     return (
-        <header className="bg-primary py-4">
+        <header className="py-4 bg-black">
             <nav className="container mx-auto flex justify-end items-center">
-                <Link href="/" className="text-light text-lg font-bold hover:underline mx-4">
-                    Главная
+                <Link href="/" className="text-white text-lg font-bold hover:underline mx-4">
+                    Библиотека асан
                 </Link>
                 <Link
                     href="/detect-pose"
-                    className="text-light text-lg font-bold hover:underline mx-4"
+                    className="text-white text-lg font-bold hover:underline mx-4"
                 >
                     Определить асану
                 </Link>
                 <Link
                     href="/profile"
-                    className="text-light text-lg font-bold hover:underline"
+                    className="text-white text-lg font-bold hover:underline"
                 >
                     Личный кабинет
                 </Link>

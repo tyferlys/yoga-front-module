@@ -2,12 +2,21 @@
 
 import React, {useState} from "react";
 import PoseModal from "@/components/pose/modal-pose";
+import {list} from "postcss";
+import {number} from "prop-types";
+
+export type ImagePoseType = {
+    id: number
+    id_pose: number
+    image: string
+}
 
 export type PoseType = {
     id: Number
-    title_sanskrit: String
-    title_transliteration: String
-    title_russian: String
+    title_sanskrit: string
+    title_transliteration: string
+    title_russian: string
+    images: [ImagePoseType]
 }
 
 type PropsType = {
@@ -21,20 +30,35 @@ const Pose = (props: PropsType) => {
 
     return (
         <>
-            <PoseModal isModalOpen={isModalOpen} onClose={() => setIsModalOpen(false)} poseData={poseData}/>
-            <div className="p-4 bg-[#9305F2] rounded-xl w-3/3 flex flex-col gap-2 cursor-pointer"  onClick={() => setIsModalOpen(true)}>
-                <div className="text-white text-center font-bold">
+            {isModalOpen && <PoseModal isModalOpen={isModalOpen} onClose={() => setIsModalOpen(false)} poseDataSource={poseData}/>}
+            <div
+                 className="bg-gray-100 p-4 w-full h-full rounded-xl flex flex-col justify-between"
+                 onClick={() => {setIsModalOpen(true)}}
+            >
+                <div className="text-xl text-bla underlineck mb-4 text-center">
                     {poseData.title_russian}
                 </div>
-                {
-                    clickable && (
-                        <div className="flex flex-row justify-center">
-                            <div className="text-white text-sm">
-                                Посмотреть подробнее
-                            </div>
-                        </div>
-                    )
-                }
+                <div className="flex flex-row justify-center">
+                    {
+                        poseData.images.length > 0 ?
+                            (
+                                <img
+                                    src={poseData.images[0].image}
+                                    alt="Image"
+                                    style={{width: "80%", objectFit: "cover"}}
+                                    className="rounded-xl"
+                                />
+                            ) :
+                            (
+                                <div className="flex flex-col items-center justify-center">
+                                    <div className="text-center">Изображения нет</div>
+                                </div>
+                            )
+                    }
+                </div>
+                <div className="underline text-center mt-4">
+                    Посмотреть подробнее
+                </div>
             </div>
         </>
     )

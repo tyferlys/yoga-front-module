@@ -5,6 +5,7 @@ import Pose from "@/components/pose/pose";
 import { setCookie } from "cookies-next";
 import PermissionModal from "@/components/modal-permission";
 import ReviewModal from "@/components/modal-review";
+import api from "@/api";
 
 function getCookie(name: string): string | null {
     const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -34,8 +35,8 @@ const DetectPose: React.FC = () => {
     };
 
     const handleDetectPose = async () => {
-        const cookieStudy = getCookie("permission_study");
-        const cookieToken = getCookie("access_token");
+        const cookieStudy = localStorage.getItem("permission_study");
+        const cookieToken = localStorage.getItem("access_token");
         console.log(cookieStudy)
         if (cookieStudy == null && cookieToken == null){
             setIsModalOpen(true)
@@ -43,16 +44,9 @@ const DetectPose: React.FC = () => {
         else{
             console.log(result)
             if (image) {
-                const response = await fetch(`http://${hostServer}/api/network/prediction`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ image }),
-                    credentials: 'include',
-                });
+                const response = await api.post(`/api/network/prediction`, { image })
 
-                let result = await response.json()
+                let result = await response.data
                 setResult(result.yoga_poses);
                 setIdResultPrediction(result.result_prediction_id)
             } else {
@@ -61,8 +55,8 @@ const DetectPose: React.FC = () => {
         }
     };
 
-    const handlerSetCookieStudy = (change: String) => {
-        setCookie("permission_study", change, { maxAge: 60 * 60 * 24 * 7 * 10 })
+    const handlerSetCookieStudy = (change: string) => {
+        localStorage.setItem("permission_study", change)
         setIsModalOpen(false)
     }
 
@@ -75,7 +69,7 @@ const DetectPose: React.FC = () => {
                 <div className="bg-white p-8 rounded-lg shadow-lg max-w-5xl w-full flex">
                     {/* Левая часть с загрузкой изображения */}
                     <div className="w-1/2 pr-6">
-                        <h1 className="text-2xl font-bold text-center text-[#9305F2] mb-4">
+                        <h1 className="text-2xl font-bold text-center text-black mb-4">
                             Определить асану
                         </h1>
                         <p className="text-center text-lg text-[#333] mb-6">
@@ -96,14 +90,14 @@ const DetectPose: React.FC = () => {
                             <input
                                 type="file"
                                 accept="image/*"
-                                className="p-2 bg-[#9305F2] text-white rounded-md"
+                                className="p-2 text-black rounded-md"
                                 onChange={handleFileChange}
                             />
                         </div>
 
                         <div className="flex flex-col items-center justify-center  gap-2">
                             <button
-                                className="px-4 py-2 bg-primary text-white rounded-md w-2/3"
+                                className="px-4 py-2 bg-black text-white rounded-md w-2/3"
                                 onClick={handleDetectPose}
                             >
                                 Начать определение
@@ -111,7 +105,7 @@ const DetectPose: React.FC = () => {
                             {
                                 result && idResultPrediction && (
                                     <button
-                                        className="px-4 py-2 bg-[#C763F2] text-white rounded-md w-2/3"
+                                        className="px-4 py-2 bg-red-600 text-white rounded-md w-2/3"
                                         onClick={() => {setIsModalOpenReview(true)}}
                                     >
                                         Оставить отзыв
@@ -124,8 +118,8 @@ const DetectPose: React.FC = () => {
                     {/* Правая часть с результатом */}
                     <div className="w-1/2 pl-6 border-l-2 border-[#ddd] flex flex-col justify-center">
                         {result ? (
-                            <div className="flex flex-col justify-center items-center gap-5">
-                                <h2 className="text-xl font-bold text-[#9305F2] mb-4 text-center">Результат</h2>
+                            <div className="flex flex-col justify-center items-center gap-5 w-full">
+                                <h2 className="text-xl font-bold text-black mb-4 text-center">Результат</h2>
                                 <Pose poseData={result[0]} clickable={true}/>
                             </div>
                         ) : (

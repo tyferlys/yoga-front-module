@@ -2,7 +2,7 @@
 
 const Footer = () => {
     return (
-        <footer className="bg-[#9305F2] text-white py-6">
+        <footer className="bg-black text-white py-6">
             <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
                 <div>
                     <h3 className="text-xl font-bold text-[#F2F2F2]">Контактная информация</h3>

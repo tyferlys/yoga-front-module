@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {toast, ToastContainer} from "react-toastify";
+import axios from "axios";
+import api from "@/api";
 
 const Registration = () => {
     const [login, setLogin] = useState('');
@@ -21,17 +23,11 @@ const Registration = () => {
             return;
         }
         try {
-            const response = await fetch(`http://${hostServer}/api/auth/registration`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ login, mail, password }),
-            });
+            const response = await api.post(`/api/auth/registration`, JSON.stringify({ login, mail, password }))
 
-            const data = await response.json();
+            const data = response.data;
 
-            if (response.ok) {
+            if (response.status == 200) {
                 toast.success("Регистрация прошла успешно, подтверждение регистрации отправлено на почту.", { position: "bottom-right" });
                 setTimeout(() => {
                     router.push('/auth/login');
@@ -49,7 +45,7 @@ const Registration = () => {
             <ToastContainer position="bottom-right" autoClose={3000} />
             <div className="min-h-screen bg-[#F2F2F2] flex items-center justify-center">
                 <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-                    <h1 className="text-2xl font-bold text-center text-[#9305F2] mb-4">Регистрация</h1>
+                    <h1 className="text-2xl font-bold text-center text-black mb-4">Регистрация</h1>
                     <form onSubmit={handleRegister}>
                         <div className="mb-4">
                             <label htmlFor="login" className="block text-sm font-medium text-[#333]">Логин</label>
@@ -58,7 +54,7 @@ const Registration = () => {
                                 id="login"
                                 value={login}
                                 onChange={(e) => setLogin(e.target.value)}
-                                className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                                className="mt-1 p-2 w-full border border-black rounded-md"
                                 required
                             />
                         </div>
@@ -69,7 +65,7 @@ const Registration = () => {
                                 id="mail"
                                 value={mail}
                                 onChange={(e) => setMail(e.target.value)}
-                                className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                                className="mt-1 p-2 w-full border border-black rounded-md"
                                 required
                             />
                         </div>
@@ -80,7 +76,7 @@ const Registration = () => {
                                 id="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                                className="mt-1 p-2 w-full border border-black rounded-md"
                                 required
                             />
                         </div>
@@ -99,7 +95,7 @@ const Registration = () => {
                         <div className="flex justify-center">
                             <button
                                 type="submit"
-                                className="px-4 py-2 bg-[#9305F2] text-white rounded-md hover:bg-[#C763F2]"
+                                className="px-4 py-2 w-2/3 bg-black text-white rounded-md"
                             >
                                 Зарегистрироваться
                             </button>
@@ -107,7 +103,7 @@ const Registration = () => {
                     </form>
                     <p className="text-center mt-4">
                         Уже есть аккаунт?{' '}
-                        <a href="/auth/login" className="text-[#9305F2]">Войти</a>
+                        <a href="/auth/login" className="black underline">Войти</a>
                     </p>
                 </div>
             </div>

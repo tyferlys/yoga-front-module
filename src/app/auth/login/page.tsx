@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import {useRouter} from "next/navigation";
 import Cookie from "js-cookie";
+import axios from "axios";
+import api from "@/api";
 
 const Login = () => {
     const [login, setLogin] = useState('');
@@ -15,18 +17,12 @@ const Login = () => {
         event.preventDefault();
 
         try {
-            const response = await fetch(`http://${hostServer}/api/auth`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ login, password }),
-            });
+            const response = await api.post(`${hostServer}/api/auth`, { login, password });
 
-            const data = await response.json();
+            const data = response.data;
 
-            if (response.ok) {
-                Cookie.set("access_token", data.access_token)
+            if (response.status == 200) {
+                localStorage.setItem("access_token", data.access_token)
                 window.location.href = "/profile"
             } else {
                 setError(data.message || 'Ошибка авторизации');
@@ -39,7 +35,7 @@ const Login = () => {
     return (
         <div className="min-h-screen bg-[#F2F2F2] flex items-center justify-center">
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-                <h1 className="text-2xl font-bold text-center text-[#9305F2] mb-4">Авторизация</h1>
+                <h1 className="text-2xl font-bold text-center text-black mb-4">Авторизация</h1>
                 <div>
                     <div className="mb-4">
                         <label htmlFor="login" className="block text-sm font-medium text-[#333]">Логин</label>
@@ -48,7 +44,7 @@ const Login = () => {
                             id="login"
                             value={login}
                             onChange={(e) => setLogin(e.target.value)}
-                            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                            className="mt-1 p-2 w-full border border-black rounded-md"
                             required
                         />
                     </div>
@@ -59,7 +55,7 @@ const Login = () => {
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                            className="mt-1 p-2 w-full border border-black rounded-md"
                             required
                         />
                     </div>
@@ -67,7 +63,7 @@ const Login = () => {
                     <div className="flex justify-center">
                         <button
                             onClick={handleLogin}
-                            className="px-4 py-2 bg-[#9305F2] text-white rounded-md hover:bg-[#C763F2]"
+                            className="px-2 w-1/3 py-2 bg-black text-white rounded-md"
                         >
                             Войти
                         </button>
@@ -75,7 +71,7 @@ const Login = () => {
                 </div>
                 <p className="text-center mt-4">
                     Нет аккаунта?{' '}
-                    <a href="/auth/registration" className="text-[#9305F2]">Зарегистрироваться</a>
+                    <a href="/auth/registration" className="text-black underline">Зарегистрироваться</a>
                 </p>
             </div>
         </div>

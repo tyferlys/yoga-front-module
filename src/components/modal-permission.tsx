@@ -3,7 +3,7 @@ import React from "react";
 
 type PropsType = {
     isModalOpen: Boolean
-    setCookieStudy: (change: String) => void
+    setCookieStudy: (change: string) => void
 }
 
 const PermissionModal = (props: PropsType) => {

@@ -3,6 +3,9 @@
 import Image from "next/image";
 import React, {useEffect, useState} from "react";
 import Pose, {PoseType} from "@/components/pose/pose";
+import axios from "axios";
+import api from "@/api";
+import YogaPoseList from "@/components/list-poses";
 
 export default function Home() {
     const [poses, setPoses] = useState([])
@@ -13,16 +16,9 @@ export default function Home() {
     const hostServer = process.env.NEXT_PUBLIC_HOST_SERVER;
 
     async function fetchData(page_index: number){
-        console.log(text)
-        const response = await fetch(`http://${hostServer}/api/yoga_poses?page=${page_index}&count=9${text != "" ? `&text=${text}` : ""}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-        });
+        const response = await api.get(`/api/yoga_poses?page=${page_index}&count=200${text != "" ? `&text=${text}` : ""}`);
 
-        let result = await response.json()
+        let result = await response.data
 
         setPage(page_index)
         setPoses(result.yoga_poses)
@@ -53,38 +49,17 @@ export default function Home() {
     }
 
     return (
-        <div className="min-h-screen flex flex-col justify-center">
-            <div className="w-11/12 m-auto">
-                <div className="text-primary text-5xl font-bold">
+        <div className="min-h-screen flex flex-col w-11/12 m-auto">
+            <div className="my-10">
+                <div className="text-black text-5xl font-bold text-center">
                     Библиотека асан
                 </div>
-                <div className="flex flex-col gap-4">
-                    <div className="text-primary text-xl">Можете найти асану через поиск</div>
-                    <input value={text} onChange={(event) => {changeTextFind(event.target.value)}} type="text" className="bg-light border-b-2 border-black p-2 outline-0" placeholder="Введите название асаны"/>
-                    <div className="grid grid-cols-3 gap-4 items-stretch">
-                        {
-                            poses.map((item: PoseType, i: any) => {
-                                return (
-                                    <div key={i}><Pose clickable={false} poseData={item}/></div>
-                                )
-                            })
-                        }
-                    </div>
-                    <div className="flex flex-row items-center gap-2 justify-center">
-                        <button
-                            className="m-auto mt-4 text-center bg-secondary text-white font-bold w-2/5 rounded-xl p-2"
-                            onClick={() => {changePage(page - 1)}}
-                        >
-                            Предыдущая страница
-                        </button>
-                        <div className="m-auto mt-4 text-center bg-secondary text-white font-bold w-1/5 rounded-xl p-2">Страница {page}</div>
-                        <button
-                            className="m-auto mt-4 text-center bg-secondary text-white font-bold w-2/5 rounded-xl p-2"
-                            onClick={() => {changePage(page + 1)}}
-                        >
-                            Следующая страница
-                        </button>
-                    </div>
+                <div className="flex flex-col mt-10">
+                    {
+                        poses.length > 0 && (
+                            <YogaPoseList yogaPoses={poses}/>
+                        )
+                    }
                 </div>
             </div>
         </div>

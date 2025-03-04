@@ -1,6 +1,7 @@
 import {createPortal} from "react-dom";
 import React, {useEffect, useState} from "react";
 import Pose, { PoseType } from "@/components/pose/pose";
+import api from "@/api";
 
 type PropsType = {
     isModalOpen: Boolean
@@ -14,7 +15,7 @@ const QuestionOne = (props: any) => {
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="text-primary text-xl">Правильно ли нейронная сеть распознала асану?</div>
+            <div className="text-black underline text-xl">Правильно ли нейронная сеть распознала асану?</div>
             <div className="flex flex-row gap-2 w-1/2">
                 <button
                     className="text-center bg-primary text-white font-bold w-2/5 rounded-xl p-2"
@@ -44,8 +45,8 @@ const QuestionTwo = (props: any) => {
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="text-primary text-xl">Выберите в следующем списке асан верную, если ее нет, можете пропустить</div>
-            <div className="grid grid-cols-2 gap-4 items-stretch">
+            <div className="text-blacktext-xl">Выберите в следующем списке асан верную, если ее нет, можете пропустить</div>
+            <div className="grid grid-cols-5 gap-4 items-stretch">
                 {
                     poses.map((item: PoseType, i: any) => {
                         return (
@@ -75,15 +76,9 @@ const QuestionThree = (props: any) => {
 
     async function fetchData(page_index: number){
         console.log(text)
-        const response = await fetch(`http://${hostServer}/api/yoga_poses?page=${page_index}&count=6${text != "" ? `&text=${text}` : ""}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-        });
+        const response = await api.get(`/api/yoga_poses?page=${page_index}&count=4${text != "" ? `&text=${text}` : ""}`)
 
-        let result = await response.json()
+        let result = response.data
 
         setPage(page_index)
         setPoses(result.yoga_poses)
@@ -115,9 +110,9 @@ const QuestionThree = (props: any) => {
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="text-primary text-xl">Выберите в следующем списке асан верную, если ее нет, можете пропустить</div>
+            <div className="text-black text-xl">Выберите в следующем списке асан верную, если ее нет, можете пропустить</div>
             <input value={text} onChange={(event) => {changeTextFind(event.target.value)}} type="text" className="bg-light border-b-2 border-black p-2 outline-0" placeholder="Введите название асаны"/>
-            <div className="grid grid-cols-2 gap-4 items-stretch">
+            <div className="grid grid-cols-4 gap-4 items-stretch">
                 {
                     poses.map((item: PoseType, i: any) => {
                         return (
@@ -155,20 +150,20 @@ const QuestionFour = (props: any) => {
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="text-primary text-xl">Вы можете написать верный ответ, если не знаете оставьте поля пустыми</div>
+            <div className="text-black text-xl">Вы можете написать верный ответ, если не знаете оставьте поля пустыми</div>
             <div className="flex flex-col justify-center gap-4">
                 <div className="flex flex-col gap-2 justify-center">
-                    <div className="text-primary font-bold text-xl text-center">Название на Санскрите</div>
+                    <div className="text-black font-bold text-xl text-center">Название на Санскрите</div>
                     <input type="text" className="w-1/2 m-auto border-b-2 border-black bg-light outline-0 text-center p-2"
                            onChange={(event) => {setRightAnswerSanskrit(event.target.value)}}/>
                 </div>
                 <div className="flex flex-col gap-2 justify-center">
-                    <div className="text-primary font-bold text-xl text-center">Название на транслитерации</div>
+                    <div className="text-black font-bold text-xl text-center">Название на транслитерации</div>
                     <input type="text" className="w-1/2 m-auto border-b-2 border-black bg-light outline-0 text-center p-2"
                            onChange={(event) => {setRightTransliteration(event.target.value)}}/>
                 </div>
                 <div className="flex flex-col gap-2 justify-center">
-                    <div className="text-primary font-bold text-xl text-center">Название на Русском</div>
+                    <div className="text-black font-bold text-xl text-center">Название на Русском</div>
                     <input type="text" className="w-1/2 m-auto border-b-2 border-black bg-light outline-0 text-center p-2"
                            onChange={(event) => {setRightAnswerRussian(event.target.value)}}/>
                 </div>
@@ -263,14 +258,14 @@ const ReviewModal = (props: PropsType) => {
 
     return createPortal(
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white px-5 pb-10 pt-5 rounded-lg shadow-lg relative w-1/3">
+            <div className="bg-white px-5 pb-10 pt-5 rounded-lg shadow-lg relative w-2/3">
                 <div className="flex flex-col justify-center">
                     <button onClick={onCloseReviewModal}
                             className="text-center bg-red-600 text-white font-bold m-auto rounded-xl py-2 px-4 mr-2 mb-2">
                         ✕
                     </button>
 
-                    <div className="text-3xl text-center text-primary font-bold mb-4">
+                    <div className="text-3xl text-center text-black font-bold mb-4">
                         Оцените результат тестирования
                     </div>
 
@@ -308,7 +303,7 @@ const ReviewModal = (props: PropsType) => {
                         }
                         {
                             numberQuestion == -1 && (
-                                <div className="text-center font-bold text-primary text-xl">Спасибо, что прошли опрос</div>
+                                <div className="text-center font-bold text-black text-xl">Спасибо, что прошли опрос</div>
                             )
                         }
                     </div>
