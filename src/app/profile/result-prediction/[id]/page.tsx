@@ -44,8 +44,8 @@ const ResultPrediction = ({ params }: { params: { id: string } }) => {
         try {
             const res = await api.get(`/api/result_prediction/${id}`);
 
-            if (res.ok) {
-                const data = await res.json();
+            if (res.status == 200) {
+                const data = await res.data;
                 setResultPrediction(data)
             }
         } catch (error) {
