@@ -7,6 +7,7 @@ import Pose, {ImagePoseType} from "@/components/pose/pose";
 import {GetServerSideProps} from "next";
 import { use } from "react";
 import ReviewModal from "@/components/modal-review";
+import api from "@/api";
 
 export interface ResultPredictionType {
     id: number
@@ -41,13 +42,7 @@ const ResultPrediction = ({ params }: { params: { id: string } }) => {
 
     const fetchData = async (id: number) => {
         try {
-            const res = await fetch(`http://${hostServer}/api/result_prediction/${id}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-            });
+            const res = await api.get(`/api/result_prediction/${id}`);
 
             if (res.ok) {
                 const data = await res.json();
