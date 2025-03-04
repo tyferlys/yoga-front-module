@@ -2,8 +2,8 @@
 
 import React, {Suspense, useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
-import OptionsModal from "@/components/modal-options";
-import Pose from "@/components/pose/pose";
+
+import Pose, {ImagePoseType} from "@/components/pose/pose";
 import {GetServerSideProps} from "next";
 import { use } from "react";
 import ReviewModal from "@/components/modal-review";
@@ -27,6 +27,7 @@ export interface Answer {
     title_sanskrit: string
     title_transliteration: string
     title_russian: string
+    images: [ImagePoseType]
 }
 
 const ResultPrediction = ({ params }: { params: { id: string } }) => {
