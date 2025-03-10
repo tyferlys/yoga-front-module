@@ -195,22 +195,15 @@ const ReviewModal = (props: PropsType) => {
     useEffect(() => {
         async function fetchData(){
             if (numberQuestion == -1) {
-                const response = await fetch(`http://${hostServer}/api/result_prediction/${result_prediction_id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        is_right_top1: isRightTop1,
-                        is_right_top5: isRightTop5,
-                        right_answer_system: rightAnswerSystem,
-                        right_answer_sanskrit: rightAnswerSanskrit,
-                        right_transliteration: rightTransliteration,
-                        right_answer_russian: rightAnswerRussian
-                    }),
-                    credentials: 'include',
+                const response = await api.put(`/api/result_prediction/${result_prediction_id}`, {
+                    is_right_top1: isRightTop1,
+                    is_right_top5: isRightTop5,
+                    right_answer_system: rightAnswerSystem,
+                    right_answer_sanskrit: rightAnswerSanskrit,
+                    right_transliteration: rightTransliteration,
+                    right_answer_russian: rightAnswerRussian
                 });
-                let result = await response.json()
+                let result = await response.data
                 console.log(result)
             }
 

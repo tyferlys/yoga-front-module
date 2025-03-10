@@ -12,11 +12,13 @@ const Profile = () => {
     const [page, setPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
 
+    const [onlyUserPredictions, setOnlyUserPredictions] = useState(true);
+
     const router = useRouter();
 
     const fetchPredictionHistory = async (page: number) => {
         try {
-            const res = await api.get(`/api/result_prediction?page=${page}&count=4`);
+            const res = await api.get(`/api/result_prediction?page=${page}&count=4&only_user_predictions=${onlyUserPredictions}`);
 
             if (res.status === 200) {
                 const data = await res.data;
@@ -53,6 +55,7 @@ const Profile = () => {
                         </Link>
                     </div>
                     <p><strong>Дата:</strong> {new Date(prediction.created_at).toLocaleDateString()}</p>
+                    <p><strong>Пользователь:</strong> {prediction.user.login}</p>
                     <div className="mt-4 mb-4 w-2/3 m-auto">
                         <img
                             src={prediction.image}
@@ -76,7 +79,11 @@ const Profile = () => {
 
     useEffect(() => {
         fetchPredictionHistory(page);
-    }, [page]);
+    }, [page, onlyUserPredictions]);
+
+    const handleSelectOnlyUserPrediction = (event: any) => {
+        setOnlyUserPredictions(event.target.value == "true");
+    }
 
     return (
         <>
@@ -84,6 +91,13 @@ const Profile = () => {
                 <div className="min-h-screen w-11/12 m-auto flex flex-row gap-5 p-4">
                     <div className="m-auto w-3/5 bg-white p-8 rounded-lg shadow-lg">
                         <h1 className="m-auto text-2xl font-bold text-center text-black mb-4">История предсказаний</h1>
+
+                        <div className="flex flex-row gap-4 my-4">
+                            <select className="bg-gray-100 p-2" onChange={handleSelectOnlyUserPrediction} defaultValue={`${onlyUserPredictions}`}>
+                                <option value={"true"}>Свои предсказания</option>
+                                <option value={"false"}>Предсказания всех пользователей</option>
+                            </select>
+                        </div>
 
                         <div className="flex justify-between mb-6">
                             <button
