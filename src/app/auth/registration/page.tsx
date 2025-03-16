@@ -23,7 +23,7 @@ const Registration = () => {
             return;
         }
         try {
-            const response = await api.post(`/api/auth/registration`, JSON.stringify({ login, mail, password }))
+            const response = await api.post(`/api/auth/registration`, { login, mail, password })
 
             const data = response.data;
 
@@ -46,7 +46,7 @@ const Registration = () => {
             <div className="min-h-screen bg-[#F2F2F2] flex items-center justify-center">
                 <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
                     <h1 className="text-2xl font-bold text-center text-black mb-4">Регистрация</h1>
-                    <form onSubmit={handleRegister}>
+                    <div>
                         <div className="mb-4">
                             <label htmlFor="login" className="block text-sm font-medium text-[#333]">Логин</label>
                             <input
@@ -94,13 +94,13 @@ const Registration = () => {
                         {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
                         <div className="flex justify-center">
                             <button
-                                type="submit"
                                 className="px-4 py-2 w-2/3 bg-black text-white rounded-md"
+                                onClick={handleRegister}
                             >
                                 Зарегистрироваться
                             </button>
                         </div>
-                    </form>
+                    </div>
                     <p className="text-center mt-4">
                         Уже есть аккаунт?{' '}
                         <a href="/auth/login" className="black underline">Войти</a>

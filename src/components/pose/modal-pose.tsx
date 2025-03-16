@@ -18,6 +18,7 @@ const PoseModal = (props: PropsType) => {
     const [titleSanskrit, setTitleSanskrit] = useState<string>(props.poseDataSource.title_sanskrit)
     const [titleTransliteration, setTitleTransliteration] = useState<string>(props.poseDataSource.title_transliteration)
     const [titleRussian, setTitleRussian] = useState<string>(props.poseDataSource.title_russian)
+    const [titleRussianInterpretation, setTitleRussianInterpretation] = useState<string>(props.poseDataSource.title_russian_interpretation)
     const [isEdit, setIsEdit] = useState(false)
     const [base64Image, setBase64Image] = useState<string | null>(null);
     const [indexSlider, setIndexSlider] = useState(0)
@@ -39,6 +40,15 @@ const PoseModal = (props: PropsType) => {
 
         if (result.status == 200){
             toast.success("Изменения успешно применены")
+        }
+    }
+
+    const deleteImageYogaPose = async (id_image: number) => {
+        const result = await api.delete(`api/yoga_poses/${poseData.id}/images?image_id=${id_image}`)
+
+        if (result.status == 200){
+            toast.success("Фото успешно удалено")
+            setPoseData({...result.data})
         }
     }
 
@@ -71,7 +81,7 @@ const PoseModal = (props: PropsType) => {
 
     const saveImage = async () => {
         if (base64Image != null){
-            const result = await api.patch(`api/yoga_poses/${poseData.id}`, {
+            const result = await api.patch(`api/yoga_poses/${poseData.id}/images`, {
                 images: [base64Image]
             })
             if (result.status == 200){
@@ -121,7 +131,7 @@ const PoseModal = (props: PropsType) => {
                                        <div className="text-lg">Название на Санскрите</div>
                                        <input
                                            onChange={(event) => {setTitleSanskrit(event.target.value)}}
-                                           className={`w-1/2 text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
+                                           className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
                                            disabled={!isEdit}
                                            value={titleSanskrit}
                                        />
@@ -130,7 +140,7 @@ const PoseModal = (props: PropsType) => {
                                        <div className="text-lg">Название на Транслитерации</div>
                                        <input
                                            onChange={(event) => {setTitleTransliteration(event.target.value)}}
-                                           className={`w-1/2 text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
+                                           className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
                                            disabled={!isEdit}
                                            value={titleTransliteration}
                                        />
@@ -139,8 +149,16 @@ const PoseModal = (props: PropsType) => {
                                        <div className="text-lg">Название на Русском</div>
                                        <input
                                            onChange={(event) => {setTitleRussian(event.target.value)}}
-                                           className={`w-1/2 text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
+                                           className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
                                            disabled={!isEdit} value={titleRussian}
+                                       />
+                                   </div>
+                                   <div className="flex flex-col gap-1">
+                                       <div className="text-lg">Название на Русском альтернативное</div>
+                                       <input
+                                           onChange={(event) => {setTitleRussianInterpretation(event.target.value)}}
+                                           className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
+                                           disabled={!isEdit} value={titleRussianInterpretation}
                                        />
                                    </div>
                                </div>
@@ -159,18 +177,25 @@ const PoseModal = (props: PropsType) => {
                                            )
                                    }
 
-                                   <div className={`grid ${poseData.images.length > 0 ? "grid-cols-2" : "grid-cols-1"}  gap-2`}>
+                                   <div className={`grid ${poseData.images.length > 0 ? "grid-cols-2" : "grid-cols-1"}  gap-10 `}>
                                        {
                                            poseData.images.length > 0 ?
                                                (
                                                    poseData.images.slice(indexSlider * 4, indexSlider * 4 + 4).map((imageData, index: number) => (
-                                                       <img
-                                                           key={index}
-                                                           src={imageData.image}
-                                                           alt="Image"
-                                                           style={{width: "80%", objectFit: "cover"}}
-                                                           className="rounded-xl m-auto"
-                                                       />
+                                                       <div key={index} className="flex flex-row gap-2 items-start">
+                                                           <img
+                                                               key={index}
+                                                               src={imageData.image}
+                                                               alt="Image"
+                                                               style={{objectFit: "contain"}}
+                                                               className="rounded-xl m-auto w-full h-full"
+                                                           />
+                                                           {
+                                                               isAdmin && <div className="text-lg bg-red-600 text-white p-2 rounded font-bold cursor-pointer" onClick={() => deleteImageYogaPose(imageData.id)}>
+                                                                   Х
+                                                               </div>
+                                                           }
+                                                       </div>
                                                    ))
                                                ) :
                                                (

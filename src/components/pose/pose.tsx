@@ -16,6 +16,7 @@ export type PoseType = {
     title_sanskrit: string
     title_transliteration: string
     title_russian: string
+    title_russian_interpretation: string
     images: [ImagePoseType]
 }
 
