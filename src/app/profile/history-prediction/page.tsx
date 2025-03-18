@@ -65,7 +65,7 @@ const Profile = () => {
                     </div>
                     <p className="text-center"><strong>Результат предсказания:</strong></p>
                     <div className="flex flex-row gap-3 flex-wrap mt-3 justify-center">
-                        <Pose poseData={prediction.answer[0]} clickable={true}/>
+                        <Pose poseData={prediction.answer[0]} clickable={true} updateList={() => {}}/>
                     </div>
                 </div>
             );
