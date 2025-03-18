@@ -35,7 +35,8 @@ const PoseModal = (props: PropsType) => {
         const result = await api.put(`api/yoga_poses/${poseData.id}`, {
             title_sanskrit: titleSanskrit,
             title_transliteration: titleTransliteration,
-            title_russian: titleRussian
+            title_russian: titleRussian,
+            title_russian_interpretation: setTitleRussianInterpretation
         })
 
         if (result.status == 200){
