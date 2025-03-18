@@ -31,23 +31,6 @@ export default function Home() {
         }
     });
 
-    const changePage = (page_index: number)  => {
-        if (page_index <= 1) {
-            fetchData(1)
-        }
-        else if (page_index >= maxPage){
-            fetchData(maxPage)
-        }
-        else{
-            fetchData(page_index)
-        }
-    }
-
-    const changeTextFind = (text_find: string) => {
-        setText(text_find)
-        fetchData(1)
-    }
-
     return (
         <div className="min-h-screen flex flex-col w-11/12 m-auto">
             <div className="my-10">
@@ -57,7 +40,7 @@ export default function Home() {
                 <div className="flex flex-col mt-10">
                     {
                         poses.length > 0 && (
-                            <YogaPoseList yogaPoses={poses}/>
+                            <YogaPoseList yogaPoses={poses} updateList={() => {fetchData(1)}}/>
                         )
                     }
                 </div>

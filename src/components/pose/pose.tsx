@@ -23,15 +23,16 @@ export type PoseType = {
 type PropsType = {
     poseData: PoseType
     clickable: boolean
+    updateList: () => void;
 }
 
 const Pose = (props: PropsType) => {
-    const { poseData, clickable } = props
+    const { poseData, clickable, updateList} = props
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <>
-            {isModalOpen && <PoseModal isModalOpen={isModalOpen} onClose={() => setIsModalOpen(false)} poseDataSource={poseData}/>}
+            {isModalOpen && <PoseModal isModalOpen={isModalOpen} onClose={() => {setIsModalOpen(false); updateList()}} poseDataSource={poseData}/>}
             <div
                  className="bg-gray-100 p-4 w-full h-full rounded-xl flex flex-col justify-between"
                  onClick={() => {setIsModalOpen(true)}}

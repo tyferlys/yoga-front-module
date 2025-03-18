@@ -4,9 +4,10 @@ import {useState} from "react";
 
 type Props = {
     yogaPoses: PoseType[];
+    updateList: () => void;
 };
 
-export default function YogaPoseList({ yogaPoses }: Props) {
+export default function YogaPoseList({ yogaPoses, updateList}: Props) {
     const groupedPoses = yogaPoses.reduce<Record<string, PoseType[]>>((acc, pose) => {
         const firstLetter = pose.title_russian.charAt(0).toUpperCase();
         if (!acc[firstLetter]) acc[firstLetter] = [];
@@ -41,7 +42,7 @@ export default function YogaPoseList({ yogaPoses }: Props) {
             <div className="flex flex-row items-stretch justify-around flex-wrap gap-4 cursor-pointer">
                 {openGroups && groupedPoses[openGroups]?.map((pose, index: number) => (
                     <div key={index} className="w-1/3">
-                        <Pose poseData={pose} clickable={true}/>
+                        <Pose poseData={pose} clickable={true} updateList={updateList}/>
                     </div>
                 ))}
             </div>
