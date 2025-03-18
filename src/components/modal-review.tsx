@@ -50,7 +50,7 @@ const QuestionTwo = (props: any) => {
                 {
                     poses.map((item: PoseType, i: any) => {
                         return (
-                            <div key={i} onClick={() => {setIdPose(item.id)}}><Pose clickable={false} poseData={item}/></div>
+                            <div key={i} onClick={() => {setIdPose(item.id)}}><Pose clickable={false} poseData={item} updateList={() => {}}/></div>
                         )
                     })
                 }
@@ -116,7 +116,7 @@ const QuestionThree = (props: any) => {
                 {
                     poses.map((item: PoseType, i: any) => {
                         return (
-                            <div key={i} onClick={() => {setIdPose(item.id)}}><Pose clickable={false} poseData={item}/></div>
+                            <div key={i} onClick={() => {setIdPose(item.id)}}><Pose clickable={false} poseData={item} updateList={() => {}}/></div>
                         )
                     })
                 }
