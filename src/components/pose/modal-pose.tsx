@@ -36,7 +36,7 @@ const PoseModal = (props: PropsType) => {
             title_sanskrit: titleSanskrit,
             title_transliteration: titleTransliteration,
             title_russian: titleRussian,
-            title_russian_interpretation: setTitleRussianInterpretation
+            title_russian_interpretation: titleRussianInterpretation
         })
 
         if (result.status == 200){
