@@ -120,7 +120,7 @@ const DetectPose: React.FC = () => {
                         {result ? (
                             <div className="flex flex-col justify-center items-center gap-5 w-full">
                                 <h2 className="text-xl font-bold text-black mb-4 text-center">Результат</h2>
-                                <Pose poseData={result[0]} clickable={true}/>
+                                <Pose poseData={result[0]} clickable={true} updateList={() => {}}/>
                             </div>
                         ) : (
                             <div className="text-center">

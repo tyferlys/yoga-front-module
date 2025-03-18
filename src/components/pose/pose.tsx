@@ -21,8 +21,8 @@ export type PoseType = {
 }
 
 type PropsType = {
-    poseData: PoseType
-    clickable: boolean
+    poseData: PoseType;
+    clickable: boolean;
     updateList: () => void;
 }
 
