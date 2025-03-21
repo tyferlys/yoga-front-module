@@ -110,23 +110,23 @@ const PoseModal = (props: PropsType) => {
        <>
            <ToastContainer position="bottom-right" autoClose={3000} />
            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-               <div className="bg-white px-5 py-10 rounded-lg shadow-lg relative w-2/3">
+               <div className="bg-white px-5 py-10 rounded-lg shadow-lg relative w-11/12 lg:w-2/3">
                    <div className="flex flex-col justify-center">
                        <div className="text-3xl text-center text-black font-bold mb-8 ">
                            Асана
                        </div>
 
-                       <div className="flex flex-row w-11/12 m-auto">
-                           <div className="w-1/2 ">
-                               <div className="text-xl mb-4">Описание асаны</div>
+                       <div className="flex flex-col lg:flex-row w-11/12 m-auto">
+                           <div className="w-full lg:w-1/2">
+                               <div className="text-xl mb-4 text-center lg:text-left">Описание асаны</div>
                            </div>
-                           <div className="w-1/2 ">
-                               <div className="text-xl mb-4">Галерея</div>
+                           <div className="w-full lg:w-1/2">
+                               <div className="text-xl mb-4 text-center lg:text-left">Галерея</div>
                            </div>
                        </div>
 
-                       <div className="flex flex-row items-center w-11/12 m-auto">
-                           <div className="w-1/2 ">
+                       <div className="flex flex-col lg:flex-row items-center w-11/12 m-auto">
+                           <div className="w-full lg:w-1/2">
                                <div className="flex flex-col gap-5">
                                    <div className="flex flex-col gap-1">
                                        <div className="text-lg">Название на Санскрите</div>
@@ -164,7 +164,7 @@ const PoseModal = (props: PropsType) => {
                                    </div>
                                </div>
                            </div>
-                           <div className="w-1/2 text-xl">
+                           <div className="hidden lg:block w-1/2 text-xl">
                                <div className="flex flex-row gap-5 items-center justify-center">
                                    {
                                        poseData.images.length > 0 ?
@@ -222,19 +222,19 @@ const PoseModal = (props: PropsType) => {
                        </div>
 
                        <div className="w-11/12 m-auto flex flex-row mt-10">
-                           <div className="w-1/2 flex flex-row justify-start gap-5 ">
+                           <div className="w-full lg:w-1/2 flex flex-col lg:flex-row justify-start gap-5 ">
                                {
                                    isAdmin && (
-                                       <button className="w-1/3 text-center bg-black text-white font-bold rounded-xl p-2" onClick={() => {toggleEdit()}}>
+                                       <button className="w-full lg:w-1/3 text-center bg-black text-white font-bold rounded-xl p-2" onClick={() => {toggleEdit()}}>
                                            {isEdit?"Сохранить": "Редактировать"}
                                        </button>
                                    )
                                }
-                               <button onClick={onClose} className="w-1/3 text-center bg-red-600 text-white font-bold rounded-xl p-2">
+                               <button onClick={onClose} className="w-full lg:w-1/3 text-center bg-red-600 text-white font-bold rounded-xl p-2">
                                    Закрыть
                                </button>
                            </div>
-                           <div className="w-1/2 flex flex-row gap-4 items-center justify-start">
+                           <div className="hidden  w-1/2 lg:flex flex-row gap-4 items-center justify-start">
                                {
                                    isAdmin && (
                                        <>

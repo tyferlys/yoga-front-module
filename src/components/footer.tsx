@@ -3,7 +3,7 @@
 const Footer = () => {
     return (
         <footer className="bg-black text-white py-6">
-            <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
+            <div className="max-w-6xl mx-auto px-4 flex flex-col lg:flex-row gap-10 lg:gap-2 justify-between lg:items-center">
                 <div>
                     <h3 className="text-xl font-bold text-[#F2F2F2]">Контактная информация</h3>
                     <ul className="mt-2 space-y-2 text-sm text-[#F2F2F2]">

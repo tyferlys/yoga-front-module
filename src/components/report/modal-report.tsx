@@ -13,13 +13,13 @@ const ReportModal = (props: PropsType) => {
 
     return createPortal(
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white px-5 pb-10 pt-5 rounded-lg shadow-lg relative w-1/3">
+            <div className="bg-white px-5 pb-10 pt-5 rounded-lg shadow-lg relative w-11/12 lg:w-1/3">
                 <div className="flex flex-col justify-center">
                     <button onClick={() => {sendRequest(null)}}
                             className="text-center bg-red-600 text-white font-bold m-auto rounded-xl py-2 px-4 mr-2 mb-2">
                         ✕
                     </button>
-                    <div className="text-3xl text-center text-primary font-bold mb-8">
+                    <div className="text-xl lg:text-3xl text-center text-primary font-bold mb-8">
                         Сообщение об ошибке
                     </div>
 

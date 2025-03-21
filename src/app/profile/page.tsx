@@ -61,7 +61,7 @@ const Profile = () => {
         <>
             <div className="bg-gray-100">
                 <div className="min-h-screen w-11/12 m-auto flex flex-row gap-5 p-4">
-                    <div className="m-auto w-3/5 bg-white p-8 rounded-lg shadow-lg">
+                    <div className="m-auto w-full lg:w-3/5 bg-white p-8 rounded-lg shadow-lg">
                         <div className="flex flex-row justify-end">
                             <div className="text-red-600 underline cursor-pointer" onClick={handleLogout}>
                                 Выйти
@@ -72,18 +72,18 @@ const Profile = () => {
                         <div className="mb-4">
                             <div className="flex flex-col gap-4">
                                 <div className="flex flex-col justify-center">
-                                    <div className="text-2xl text-black">Логин</div>
-                                    <div className="text-xl underline">{userData.login}</div>
+                                    <div className="text-2xl text-black text-center lg:text-left">Логин</div>
+                                    <div className="text-xl underline text-center lg:text-left">{userData.login}</div>
                                 </div>
                                 <div className="flex flex-col justify-center">
-                                    <div className="text-2xl text-black">Роль</div>
+                                    <div className="text-2xl text-black text-center lg:text-left">Роль</div>
                                     <div
-                                        className="text-xl underline">{userData.is_admin ? 'Администратор' : 'Пользователь'}</div>
+                                        className="text-xl underline text-center lg:text-left">{userData.is_admin ? 'Администратор' : 'Пользователь'}</div>
                                 </div>
                                 <div className="flex flex-col justify-center">
-                                    <div className="text-2xl text-black">Разрешение на просмотр статистики</div>
+                                    <div className="text-lg lg:text-2xl text-black">Разрешение на просмотр статистики</div>
 
-                                    <div className="w-1/6">
+                                    <div className="w-full lg:w-1/6">
                                         <select
                                             className="w-full outline-0  p-2 border-black border-2"
                                             defaultValue={isStudyingAllowed ? "1" : "0"}
@@ -97,23 +97,25 @@ const Profile = () => {
                             </div>
                         </div>
 
-                        <div className="flex flex-row gap-2">
-                            <button
-                                className={`mt-2 w-1/4 p-1 bg-primary text-white rounded-md ${!isChanged ? 'opacity-50' : ''}`}
-                                disabled={!isChanged}
-                                onClick={savePermissionChange}
-                            >
-                                Сохранить
-                            </button>
-                        </div>
+                        <div className="flex flex-row lg:flex-col gap-2">
+                            <div className="flex flex-row gap-2">
+                                <button
+                                    className={`mt-2 w-full lg:w-1/4 p-1 bg-primary text-white rounded-md ${!isChanged ? 'opacity-50' : ''}`}
+                                    disabled={!isChanged}
+                                    onClick={savePermissionChange}
+                                >
+                                    Сохранить
+                                </button>
+                            </div>
 
-                        <Link
-                            className={`block text-center mt-2 w-1/4 p-1 bg-black text-white rounded-md`}
-                            onClick={savePermissionChange}
-                            href="/profile/history-prediction"
-                        >
-                            История предсказаний
-                        </Link>
+                            <Link
+                                className={`block text-center mt-2 w-full lg:w-1/4 p-1 bg-black text-white rounded-md`}
+                                onClick={savePermissionChange}
+                                href="/profile/history-prediction"
+                            >
+                                История предсказаний
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

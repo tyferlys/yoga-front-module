@@ -89,7 +89,7 @@ const Profile = () => {
         <>
             <div className="bg-gray-100">
                 <div className="min-h-screen w-11/12 m-auto flex flex-row gap-5 p-4">
-                    <div className="m-auto w-3/5 bg-white p-8 rounded-lg shadow-lg">
+                    <div className="m-auto w-full lg:w-3/5 bg-white p-8 rounded-lg shadow-lg">
                         <h1 className="m-auto text-2xl font-bold text-center text-black mb-4">История предсказаний</h1>
 
                         <div className="flex flex-row gap-4 my-4">
@@ -99,7 +99,7 @@ const Profile = () => {
                             </select>
                         </div>
 
-                        <div className="flex justify-between mb-6">
+                        <div className="flex justify-between mb-6 gap-2">
                             <button
                                 onClick={() => handlePageChange(page - 1)}
                                 disabled={page <= 1}
@@ -116,11 +116,11 @@ const Profile = () => {
                             </button>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                             {renderPredictionHistory()}
                         </div>
 
-                        <div className="flex justify-between mt-6">
+                        <div className="flex justify-between mt-6 gap-2">
                             <button
                                 onClick={() => handlePageChange(page - 1)}
                                 disabled={page <= 1}

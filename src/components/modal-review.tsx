@@ -16,21 +16,21 @@ const QuestionOne = (props: any) => {
     return (
         <div className="flex flex-col gap-4">
             <div className="text-black underline text-xl">Правильно ли нейронная сеть распознала асану?</div>
-            <div className="flex flex-row gap-2 w-1/2">
+            <div className="flex flex-col lg:flex-row gap-2 w-full lg:w-1/2">
                 <button
-                    className="text-center bg-primary text-white font-bold w-2/5 rounded-xl p-2"
+                    className="text-center bg-primary text-white font-bold w-full lg:w-2/5 rounded-xl p-2"
                     onClick={setTrue}
                 >
                     Да
                 </button>
                 <button
-                    className="text-center bg-red-600 text-white font-bold w-2/5 rounded-xl p-2"
+                    className="text-center bg-red-600 text-white font-bold w-full lg:w-2/5 rounded-xl p-2"
                     onClick={setFalse}
                 >
                     Нет
                 </button>
                 <button
-                    className="text-center bg-secondary text-white font-bold w-2/5 rounded-xl p-2"
+                    className="text-center bg-secondary text-white font-bold w-full lg:w-2/5 rounded-xl p-2"
                     onClick={setNull}
                 >
                     Не знаю
@@ -46,7 +46,7 @@ const QuestionTwo = (props: any) => {
     return (
         <div className="flex flex-col gap-4">
             <div className="text-blacktext-xl">Выберите в следующем списке асан верную, если ее нет, можете пропустить</div>
-            <div className="grid grid-cols-5 gap-4 items-stretch">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 items-stretch">
                 {
                     poses.map((item: PoseType, i: any) => {
                         return (
@@ -112,7 +112,7 @@ const QuestionThree = (props: any) => {
         <div className="flex flex-col gap-4">
             <div className="text-black text-xl">Выберите в следующем списке асан верную, если ее нет, можете пропустить</div>
             <input value={text} onChange={(event) => {changeTextFind(event.target.value)}} type="text" className="bg-light border-b-2 border-black p-2 outline-0" placeholder="Введите название асаны"/>
-            <div className="grid grid-cols-4 gap-4 items-stretch">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 items-stretch">
                 {
                     poses.map((item: PoseType, i: any) => {
                         return (
@@ -154,17 +154,17 @@ const QuestionFour = (props: any) => {
             <div className="flex flex-col justify-center gap-4">
                 <div className="flex flex-col gap-2 justify-center">
                     <div className="text-black font-bold text-xl text-center">Название на Санскрите</div>
-                    <input type="text" className="w-1/2 m-auto border-b-2 border-black bg-light outline-0 text-center p-2"
+                    <input type="text" className="w-full lg:w-1/2 m-auto border-b-2 border-black bg-light outline-0 text-center p-2"
                            onChange={(event) => {setRightAnswerSanskrit(event.target.value)}}/>
                 </div>
                 <div className="flex flex-col gap-2 justify-center">
                     <div className="text-black font-bold text-xl text-center">Название на транслитерации</div>
-                    <input type="text" className="w-1/2 m-auto border-b-2 border-black bg-light outline-0 text-center p-2"
+                    <input type="text" className="w-full lg:w-1/2  m-auto border-b-2 border-black bg-light outline-0 text-center p-2"
                            onChange={(event) => {setRightTransliteration(event.target.value)}}/>
                 </div>
                 <div className="flex flex-col gap-2 justify-center">
                     <div className="text-black font-bold text-xl text-center">Название на Русском</div>
-                    <input type="text" className="w-1/2 m-auto border-b-2 border-black bg-light outline-0 text-center p-2"
+                    <input type="text" className="w-full lg:w-1/2  m-auto border-b-2 border-black bg-light outline-0 text-center p-2"
                            onChange={(event) => {setRightAnswerRussian(event.target.value)}}/>
                 </div>
             </div>
@@ -251,7 +251,7 @@ const ReviewModal = (props: PropsType) => {
 
     return createPortal(
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white px-5 pb-10 pt-5 rounded-lg shadow-lg relative w-2/3">
+            <div className="bg-white px-5 pb-10 pt-5 rounded-lg shadow-lg relative w-11/12 lg:w-2/3 overflow-y-auto max-h-[80vh]">
                 <div className="flex flex-col justify-center">
                     <button onClick={onCloseReviewModal}
                             className="text-center bg-red-600 text-white font-bold m-auto rounded-xl py-2 px-4 mr-2 mb-2">

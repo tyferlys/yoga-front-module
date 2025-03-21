@@ -24,11 +24,11 @@ export default function YogaPoseList({ yogaPoses, updateList}: Props) {
     console.log(groupedPoses)
     return (
         <div className="flex flex-col gap-10 w-11/12 m-auto">
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row flex-wrap gap-6 justify-between">
                 {sortedLetters.map(letter => (
                     <div key={letter} className="mb-2">
                         <button
-                            className="text-lg font-bold text-black underline"
+                            className="text-xl font-bold text-black underline"
                             onClick={() => toggleGroup(letter)}
                         >
                             {letter}
@@ -39,9 +39,9 @@ export default function YogaPoseList({ yogaPoses, updateList}: Props) {
             <div className="text-3xl font-bold text-center bm-5">
                 Найденные асаны:
             </div>
-            <div className="flex flex-row items-stretch justify-around flex-wrap gap-4 cursor-pointer">
+            <div className="flex flex-col items-center lg:flex-row  lg:items-stretch justify-around flex-wrap gap-4 cursor-pointer">
                 {openGroups && groupedPoses[openGroups]?.map((pose, index: number) => (
-                    <div key={index} className="w-1/3">
+                    <div key={index} className="w-full lg:w-1/3">
                         <Pose poseData={pose} clickable={true} updateList={updateList}/>
                     </div>
                 ))}

@@ -34,7 +34,7 @@ export default function Home() {
     return (
         <div className="min-h-screen flex flex-col w-11/12 m-auto">
             <div className="my-10">
-                <div className="text-black text-5xl font-bold text-center">
+                <div className="text-black text-2xl lg:text-4xl font-bold text-center">
                     Библиотека асан
                 </div>
                 <div className="flex flex-col mt-10">

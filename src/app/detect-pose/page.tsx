@@ -66,9 +66,9 @@ const DetectPose: React.FC = () => {
             <PermissionModal isModalOpen={isModalOpen} setCookieStudy={handlerSetCookieStudy}/>
             <ReviewModal poses={result} isModalOpen={isModalOpenReview} result_prediction_id={idResultPrediction} onCloseReviewModal={() => {setIsModalOpenReview(false)}}/>
             <div className="min-h-screen bg-[#F2F2F2] flex items-center justify-center">
-                <div className="bg-white p-8 rounded-lg shadow-lg max-w-5xl w-full flex">
+                <div className="bg-white p-8 rounded-lg shadow-lg max-w-5xl w-full flex flex-col lg:flex-row items-center">
                     {/* Левая часть с загрузкой изображения */}
-                    <div className="w-1/2 pr-6">
+                    <div className="w-full lg:w-1/2 pl-6 lg:pl-0 lg:pr-6">
                         <h1 className="text-2xl font-bold text-center text-black mb-4">
                             Определить асану
                         </h1>
@@ -97,7 +97,7 @@ const DetectPose: React.FC = () => {
 
                         <div className="flex flex-col items-center justify-center  gap-2">
                             <button
-                                className="px-4 py-2 bg-black text-white rounded-md w-2/3"
+                                className="px-4 py-2 bg-black text-white rounded-md w-full lg:w-2/3"
                                 onClick={handleDetectPose}
                             >
                                 Начать определение
@@ -105,7 +105,7 @@ const DetectPose: React.FC = () => {
                             {
                                 result && idResultPrediction && (
                                     <button
-                                        className="px-4 py-2 bg-red-600 text-white rounded-md w-2/3"
+                                        className="px-4 py-2 bg-red-600 text-white rounded-md w-full lg:w-2/3"
                                         onClick={() => {setIsModalOpenReview(true)}}
                                     >
                                         Оставить отзыв
@@ -116,7 +116,7 @@ const DetectPose: React.FC = () => {
                     </div>
 
                     {/* Правая часть с результатом */}
-                    <div className="w-1/2 pl-6 border-l-2 border-[#ddd] flex flex-col justify-center">
+                    <div className="w-full lg:w-1/2 pl-6 mt-10 lg:mt-0 lg:border-l-2 lg:border-[#ddd] flex flex-col justify-center">
                         {result ? (
                             <div className="flex flex-col justify-center items-center gap-5 w-full">
                                 <h2 className="text-xl font-bold text-black mb-4 text-center">Результат</h2>
