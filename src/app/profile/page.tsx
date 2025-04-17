@@ -6,6 +6,7 @@ import Pose from "@/components/pose/pose";
 import Link from "next/link";
 import Cookie from "js-cookie";
 import api from "@/api";
+import ResetPasswordRequestModal from "@/components/modal-reset-password-request";
 
 const Profile = () => {
     const [userData, setUserData] = useState<any>(null);
@@ -29,7 +30,6 @@ const Profile = () => {
                 router.push('/auth/login');
             }
         } catch (error) {
-            console.error('Ошибка:', error);
             router.push('/auth/login');
         }
     };
