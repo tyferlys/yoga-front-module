@@ -1,6 +1,6 @@
 'use client';
 
-import React, {use, useEffect, useState} from "react";
+import React, {Suspense, use, useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import Pose from "@/components/pose/pose";
 import Link from "next/link";
@@ -79,4 +79,5 @@ const ResetPassword = ({ params }: { params: { token: string } }) => {
     );
 };
 
-export default ResetPassword;
+const ResetPasswordWithSuspense = (props: any) => {return <Suspense fallback={""}><ResetPassword {...props}/></Suspense>}
+export default ResetPasswordWithSuspense;
