@@ -6,6 +6,7 @@ import { setCookie } from "cookies-next";
 import PermissionModal from "@/components/modal-permission";
 import ReviewModal from "@/components/modal-review";
 import api from "@/api";
+import {toast, ToastContainer} from "react-toastify";
 
 function getCookie(name: string): string | null {
     const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -44,11 +45,18 @@ const DetectPose: React.FC = () => {
         else{
             console.log(result)
             if (image) {
-                const response = await api.post(`/api/network/prediction`, { image })
+                const response = await api.post(`/api/network/prediction`, {
+                    image: image,
+                    permission_study: cookieStudy
+                })
 
                 let result = await response.data
                 setResult(result.yoga_poses);
                 setIdResultPrediction(result.result_prediction_id)
+
+                setTimeout(() => {
+                    toast.warning("Если вы хотите оставить отзыв о результате распознавания, то вам следует зарегистрироваться", { position: "bottom-right" });
+                }, 1000)
             } else {
                 alert("Пожалуйста, загрузите изображение.");
             }
@@ -63,6 +71,7 @@ const DetectPose: React.FC = () => {
 
     return (
         <>
+            <ToastContainer position="bottom-right" autoClose={3000} />
             <PermissionModal isModalOpen={isModalOpen} setCookieStudy={handlerSetCookieStudy}/>
             <ReviewModal poses={result} isModalOpen={isModalOpenReview} result_prediction_id={idResultPrediction} onCloseReviewModal={() => {setIsModalOpenReview(false)}}/>
             <div className="min-h-screen bg-[#F2F2F2] flex items-center justify-center">
@@ -73,7 +82,7 @@ const DetectPose: React.FC = () => {
                             Определить асану
                         </h1>
                         <p className="text-center text-lg text-[#333] mb-6">
-                            Загрузите изображение с асаной, чтобы мы могли помочь вам с её определением.
+                            Загрузите изображение с асаной, чтобы мы могли помочь вам с её определением. <br/> Допустимые форматы - png, jpg, jpeg
                         </p>
 
                         {image && (
@@ -89,7 +98,7 @@ const DetectPose: React.FC = () => {
                         <div className="flex justify-center mb-6">
                             <input
                                 type="file"
-                                accept="image/*"
+                                accept=".jpg,.jpeg,.png"
                                 className="p-2 text-black rounded-md"
                                 onChange={handleFileChange}
                             />

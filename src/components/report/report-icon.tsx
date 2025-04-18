@@ -1,6 +1,8 @@
 import {useState} from "react";
 import ReportModal from "@/components/report/modal-report";
 import {toast, ToastContainer} from "react-toastify";
+import Link from "next/link";
+
 export default function ReportIcon() {
     const [open, setOpen] = useState(false);
     const hostServer = process.env.NEXT_PUBLIC_HOST_SERVER;
@@ -25,17 +27,30 @@ export default function ReportIcon() {
         }
     }
 
+    const cookieToken = localStorage.getItem("access_token");
+
     return (
         <>
             <ReportModal isModalOpen={open} sendRequest={sendRequest}/>
             <ToastContainer position="bottom-right" autoClose={3000} />
             <div className="fixed bottom-10 right-10">
-                <button
-                    onClick={() => setOpen(!open)}
-                    className="p-3 bg-purple-600 text-white rounded-xl shadow-lg hover:bg-purple-700 transition flex items-center justify-center font-bold"
-                >
-                    Нашли ошибку?
-                </button>
+                {cookieToken ? (
+                        <button
+                            onClick={() => setOpen(!open)}
+                            className="p-3 bg-purple-600 text-white rounded-xl shadow-lg hover:bg-purple-700 transition flex items-center justify-center font-bold"
+                        >
+                            Нашли ошибку?
+                        </button>
+                ):
+                    (
+                        <Link
+                            href="/auth/registration"
+                            className="p-3 bg-purple-600 text-white rounded-xl shadow-lg hover:bg-purple-700 transition flex items-center justify-center font-bold"
+                        >
+                            Хотите зарегистрироваться?
+                        </Link>
+                    )
+                }
             </div>
         </>
     );

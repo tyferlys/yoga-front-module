@@ -25,10 +25,16 @@ const PoseModal = (props: PropsType) => {
 
 
     const checkAdmin = async () => {
-        const res = await api.get(`/api/users/me`);
-        const data = res.data
+        try{
+            const res = await api.get(`/api/users/me`);
+            const data = res.data
 
-        setIsAdmin(data.is_admin)
+            setIsAdmin(data.is_admin)
+        }
+        catch (e) {
+            // @ts-ignore
+            setIsAdmin(false)
+        }
     }
 
     const putYogaPose = async () => {
@@ -109,147 +115,149 @@ const PoseModal = (props: PropsType) => {
     return createPortal(
        <>
            <ToastContainer position="bottom-right" autoClose={3000} />
-           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-               <div className="bg-white px-5 py-10 rounded-lg shadow-lg relative w-11/12 lg:w-2/3">
-                   <div className="flex flex-col justify-center">
-                       <div className="text-3xl text-center text-black font-bold mb-8 ">
-                           Асана
-                       </div>
-
-                       <div className="flex flex-col lg:flex-row w-11/12 m-auto">
-                           <div className="w-full lg:w-1/2">
-                               <div className="text-xl mb-4 text-center lg:text-left">Описание асаны</div>
+           {isAdmin !== null && (
+               <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                   <div className="bg-white px-5 py-10 rounded-lg shadow-lg relative w-11/12 lg:w-5/6">
+                       <div className="flex flex-col justify-center">
+                           <div className="text-3xl text-center text-black font-bold mb-8 ">
+                               Асана
                            </div>
-                           <div className="w-full lg:w-1/2">
-                               <div className="text-xl mb-4 text-center lg:text-left">Галерея</div>
-                           </div>
-                       </div>
 
-                       <div className="flex flex-col lg:flex-row items-center w-11/12 m-auto">
-                           <div className="w-full lg:w-1/2">
-                               <div className="flex flex-col gap-5">
-                                   <div className="flex flex-col gap-1">
-                                       <div className="text-lg">Название на Санскрите</div>
-                                       <input
-                                           onChange={(event) => {setTitleSanskrit(event.target.value)}}
-                                           className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
-                                           disabled={!isEdit}
-                                           value={titleSanskrit}
-                                       />
-                                   </div>
-                                   <div className="flex flex-col gap-1">
-                                       <div className="text-lg">Название на Транслитерации</div>
-                                       <input
-                                           onChange={(event) => {setTitleTransliteration(event.target.value)}}
-                                           className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
-                                           disabled={!isEdit}
-                                           value={titleTransliteration}
-                                       />
-                                   </div>
-                                   <div className="flex flex-col gap-1">
-                                       <div className="text-lg">Название на Русском</div>
-                                       <input
-                                           onChange={(event) => {setTitleRussian(event.target.value)}}
-                                           className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
-                                           disabled={!isEdit} value={titleRussian}
-                                       />
-                                   </div>
-                                   <div className="flex flex-col gap-1">
-                                       <div className="text-lg">Название на Русском альтернативное</div>
-                                       <input
-                                           onChange={(event) => {setTitleRussianInterpretation(event.target.value)}}
-                                           className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
-                                           disabled={!isEdit} value={titleRussianInterpretation}
-                                       />
-                                   </div>
+                           <div className="flex flex-col lg:flex-row w-11/12 m-auto">
+                               <div className="w-full lg:w-1/2">
+                                   <div className="text-xl mb-4 text-center lg:text-left">Описание асаны</div>
+                               </div>
+                               <div className="w-full lg:w-1/2">
+                                   <div className="text-xl mb-4 text-center lg:text-left">Галерея</div>
                                </div>
                            </div>
-                           <div className="hidden lg:block w-1/2 text-xl">
-                               <div className="flex flex-row gap-5 items-center justify-center">
-                                   {
-                                       poseData.images.length > 0 ?
-                                           (
-                                               <div className="scale-150 cursor-pointer" onClick={() => {changeIndexSlider(0)}}>
-                                                   ←
-                                               </div>
-                                           ) :
-                                           (
-                                               ""
-                                           )
-                                   }
 
-                                   <div className={`grid ${poseData.images.length > 0 ? "grid-cols-2" : "grid-cols-1"}  gap-10 `}>
+                           <div className="flex flex-col lg:flex-row items-center w-11/12 m-auto">
+                               <div className="w-full lg:w-1/2">
+                                   <div className="flex flex-col gap-5">
+                                       <div className="flex flex-col gap-1">
+                                           <div className="text-lg">Название на Санскрите</div>
+                                           <input
+                                               onChange={(event) => {setTitleSanskrit(event.target.value)}}
+                                               className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
+                                               disabled={!isEdit}
+                                               value={titleSanskrit}
+                                           />
+                                       </div>
+                                       <div className="flex flex-col gap-1">
+                                           <div className="text-lg">Транслитерация</div>
+                                           <input
+                                               onChange={(event) => {setTitleTransliteration(event.target.value)}}
+                                               className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
+                                               disabled={!isEdit}
+                                               value={titleTransliteration}
+                                           />
+                                       </div>
+                                       <div className="flex flex-col gap-1">
+                                           <div className="text-lg">Название на Русском</div>
+                                           <input
+                                               onChange={(event) => {setTitleRussian(event.target.value)}}
+                                               className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
+                                               disabled={!isEdit} value={titleRussian}
+                                           />
+                                       </div>
+                                       <div className="flex flex-col gap-1">
+                                           <div className="text-lg">Перевод названия</div>
+                                           <input
+                                               onChange={(event) => {setTitleRussianInterpretation(event.target.value)}}
+                                               className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
+                                               disabled={!isEdit} value={titleRussianInterpretation}
+                                           />
+                                       </div>
+                                   </div>
+                               </div>
+                               <div className="hidden lg:block w-1/2 text-xl">
+                                   <div className="flex flex-row gap-5 items-center justify-center">
                                        {
-                                           poseData.images.length > 0 ?
+                                           poseData.images.length > 4 ?
                                                (
-                                                   poseData.images.slice(indexSlider * 4, indexSlider * 4 + 4).map((imageData, index: number) => (
-                                                       <div key={index} className="flex flex-row gap-2 items-start">
-                                                           <img
-                                                               key={index}
-                                                               src={imageData.image}
-                                                               alt="Image"
-                                                               style={{objectFit: "contain"}}
-                                                               className="rounded-xl m-auto w-full h-full"
-                                                           />
-                                                           {
-                                                               isAdmin && <div className="text-lg bg-red-600 text-white p-2 rounded font-bold cursor-pointer" onClick={() => deleteImageYogaPose(imageData.id)}>
-                                                                   Х
-                                                               </div>
-                                                           }
-                                                       </div>
-                                                   ))
+                                                   <div className="scale-150 cursor-pointer" onClick={() => {changeIndexSlider(0)}}>
+                                                       ←
+                                                   </div>
                                                ) :
                                                (
-                                                   <div className="underline">
-                                                       Изображений нет
+                                                   ""
+                                               )
+                                       }
+
+                                       <div className={`grid ${poseData.images.length > 0 ? "grid-cols-2" : "grid-cols-1"}  gap-10 `}>
+                                           {
+                                               poseData.images.length > 0 ?
+                                                   (
+                                                       poseData.images.slice(indexSlider * 4, indexSlider * 4 + 4).map((imageData, index: number) => (
+                                                           <div key={index} className="flex flex-row gap-2 items-start">
+                                                               <img
+                                                                   key={index}
+                                                                   src={imageData.image}
+                                                                   alt="Image"
+                                                                   style={{objectFit: "contain"}}
+                                                                   className="rounded-xl m-auto w-full h-full"
+                                                               />
+                                                               {
+                                                                   isAdmin && <div className="text-lg bg-red-600 text-white p-2 rounded font-bold cursor-pointer" onClick={() => deleteImageYogaPose(imageData.id)}>
+                                                                       Х
+                                                                   </div>
+                                                               }
+                                                           </div>
+                                                       ))
+                                                   ) :
+                                                   (
+                                                       <div className="underline">
+                                                           Изображений нет
+                                                       </div>
+                                                   )
+                                           }
+                                       </div>
+                                       {
+                                           poseData.images.length > 4 ?
+                                               (
+                                                   <div className="scale-150 cursor-pointer" onClick={() => {changeIndexSlider(1)}}>
+                                                       →
                                                    </div>
+                                               ) :
+                                               (
+                                                   ""
                                                )
                                        }
                                    </div>
-                                   {
-                                       poseData.images.length > 0 ?
-                                           (
-                                               <div className="scale-150 cursor-pointer" onClick={() => {changeIndexSlider(1)}}>
-                                                   →
-                                               </div>
-                                           ) :
-                                           (
-                                               ""
-                                           )
-                                   }
                                </div>
                            </div>
-                       </div>
 
-                       <div className="w-11/12 m-auto flex flex-row mt-10">
-                           <div className="w-full lg:w-1/2 flex flex-col lg:flex-row justify-start gap-5 ">
-                               {
-                                   isAdmin && (
-                                       <button className="w-full lg:w-1/3 text-center bg-black text-white font-bold rounded-xl p-2" onClick={() => {toggleEdit()}}>
-                                           {isEdit?"Сохранить": "Редактировать"}
-                                       </button>
-                                   )
-                               }
-                               <button onClick={onClose} className="w-full lg:w-1/3 text-center bg-red-600 text-white font-bold rounded-xl p-2">
-                                   Закрыть
-                               </button>
-                           </div>
-                           <div className="hidden  w-1/2 lg:flex flex-row gap-4 items-center justify-start">
-                               {
-                                   isAdmin && (
-                                       <>
-                                           <button className="w-1/2 text-center bg-black text-white font-bold rounded-xl p-2" onClick={() => {saveImage()}}>
-                                               Сохранить изображение
+                           <div className="w-11/12 m-auto flex flex-row mt-10">
+                               <div className="w-full lg:w-1/2 flex flex-col lg:flex-row justify-start gap-5 ">
+                                   {
+                                       isAdmin && (
+                                           <button className="w-full lg:w-1/3 text-center bg-black text-white font-bold rounded-xl p-2" onClick={() => {toggleEdit()}}>
+                                               {isEdit?"Сохранить": "Редактировать"}
                                            </button>
-                                           <input type="file" accept="image/*" onChange={handleFileChange} />
-                                       </>
-                                   )
-                               }
+                                       )
+                                   }
+                                   <button onClick={onClose} className="w-full lg:w-1/3 text-center bg-red-600 text-white font-bold rounded-xl p-2">
+                                       Закрыть
+                                   </button>
+                               </div>
+                               <div className="hidden  w-1/2 lg:flex flex-row gap-4 items-center justify-start">
+                                   {
+                                       isAdmin && (
+                                           <>
+                                               <button className="w-1/2 text-center bg-black text-white font-bold rounded-xl p-2" onClick={() => {saveImage()}}>
+                                                   Сохранить изображение
+                                               </button>
+                                               <input type="file" accept="image/*" onChange={handleFileChange} />
+                                           </>
+                                       )
+                                   }
+                               </div>
                            </div>
                        </div>
                    </div>
                </div>
-           </div>
+           )}
        </>
     , document.body);
 };

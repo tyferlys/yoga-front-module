@@ -12,6 +12,7 @@ export default function Home() {
     const [page, setPage] = useState(0)
     const [maxPage, setMaxPage] = useState(0)
     const [text, setText] = useState("")
+    const [isLoading, setIsLoading] = useState(true)
 
     const hostServer = process.env.NEXT_PUBLIC_HOST_SERVER;
 
@@ -20,9 +21,13 @@ export default function Home() {
 
         let result = await response.data
 
-        setPage(page_index)
-        setPoses(result.yoga_poses)
-        setMaxPage(result.all_pages)
+        setTimeout(() =>
+        {
+            setPage(page_index)
+            setPoses(result.yoga_poses)
+            setMaxPage(result.all_pages)
+            setIsLoading(false)
+        }, 500)
     }
 
     useEffect(() => {
@@ -39,9 +44,7 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col mt-10">
                     {
-                        poses.length > 0 && (
-                            <YogaPoseList yogaPoses={poses} updateList={() => {fetchData(1)}}/>
-                        )
+                        <YogaPoseList isLoading={isLoading} yogaPoses={poses} updateList={() => {fetchData(1)}}/>
                     }
                 </div>
             </div>

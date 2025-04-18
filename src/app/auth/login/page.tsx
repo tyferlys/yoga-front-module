@@ -24,7 +24,7 @@ const Login = () => {
 
             if (response.status == 200) {
                 localStorage.setItem("access_token", data.access_token)
-                window.location.href = "/profile"
+                window.location.href = "/detect-pose"
             } else {
                 setError(data.message || 'Ошибка авторизации');
             }

@@ -2,6 +2,7 @@ import {createPortal} from "react-dom";
 import React, {useEffect, useState} from "react";
 import Pose, { PoseType } from "@/components/pose/pose";
 import api from "@/api";
+import {Skeleton} from "@/components/skeleton";
 
 type PropsType = {
     isModalOpen: Boolean
@@ -68,23 +69,30 @@ const QuestionTwo = (props: any) => {
 const QuestionThree = (props: any) => {
     const {setIdPose} = props
     const [poses, setPoses] = useState([])
-    const [page, setPage] = useState(0)
+    const [page, setPage] = useState<number>(0)
     const [maxPage, setMaxPage] = useState(0)
     const [text, setText] = useState("")
+    const [isLoading, setIsLoading] = useState(true)
 
     const hostServer = process.env.NEXT_PUBLIC_HOST_SERVER;
 
-    async function fetchData(page_index: number){
-        console.log(text)
-        const response = await api.get(`/api/yoga_poses?page=${page_index}&count=4${text != "" ? `&text=${text}` : ""}`)
+    async function fetchData(page_index: number, text_find: any = null){
+        setIsLoading(true)
+        const current_text = text_find === null ? text : text_find
+        setText(current_text)
+
+        const response = await api.get(`/api/yoga_poses?page=${page_index}&count=4${current_text != "" && current_text != null ? `&text=${current_text}` : ""}`)
 
         let result = response.data
 
         setPage(page_index)
         setPoses(result.yoga_poses)
         setMaxPage(result.all_pages)
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 500)
     }
-    // todo массив зависимостей
+
     useEffect(() => {
         if (page == 0){
             fetchData(1)
@@ -104,8 +112,7 @@ const QuestionThree = (props: any) => {
     }
 
     const changeTextFind = (text_find: string) => {
-        setText(text_find)
-        fetchData(1)
+        fetchData(1, text_find)
     }
 
     return (
@@ -114,22 +121,36 @@ const QuestionThree = (props: any) => {
             <input value={text} onChange={(event) => {changeTextFind(event.target.value)}} type="text" className="bg-light border-b-2 border-black p-2 outline-0" placeholder="Введите название асаны"/>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 items-stretch">
                 {
-                    poses.map((item: PoseType, i: any) => {
-                        return (
-                            <div key={i} onClick={() => {setIdPose(item.id)}}><Pose clickable={false} poseData={item} updateList={() => {}}/></div>
+                    !isLoading
+                        ? (
+                            poses.map((item: PoseType, i: any) => {
+                                return (
+                                    <div key={i} onClick={() => {setIdPose(item.id)}}><Pose clickable={false} poseData={item} updateList={() => {}}/></div>
+                                )
+                            })
                         )
-                    })
+                        : (
+                            [...Array(4)].map((_, i) => (
+                                <Skeleton key={i} className="w-full h-[300px] flex flex-col items-center p-4">
+                                    <Skeleton className="w-[80%] h-[30px] bg-gray-200 mt-4"/>
+                                    <Skeleton className="w-[80%] h-[300px] bg-gray-200 mt-8"/>
+                                </Skeleton>
+                            ))
+                        )
+
                 }
             </div>
             <div className="flex flex-row gap-2 justify-center">
                 <button
-                    className="m-auto mt-4 text-center bg-secondary text-white font-bold w-2/5 rounded-xl p-2"
+                    disabled={page <= 1}
+                    className={`m-auto mt-4 text-center bg-secondary text-white font-bold w-2/5 rounded-xl p-2 disabled:bg-gray-300`}
                     onClick={() => {changePage(page - 1)}}
                 >
                     Предыдущая страница
                 </button>
                 <button
-                    className="m-auto mt-4 text-center bg-secondary text-white font-bold w-2/5 rounded-xl p-2"
+                    disabled={page >= maxPage}
+                    className="m-auto mt-4 text-center bg-secondary text-white font-bold w-2/5 rounded-xl p-2 disabled:bg-gray-300"
                     onClick={() => {changePage(page + 1)}}
                 >
                     Следующая страница
@@ -146,7 +167,7 @@ const QuestionThree = (props: any) => {
 }
 
 const QuestionFour = (props: any) => {
-    const {setRightAnswerSanskrit, setRightTransliteration, setRightAnswerRussian, saveAnswer} = props
+    const {setRightAnswerSanskrit, setRightTransliteration, setRightAnswerRussian, setRightAnswerRussianAlter, saveAnswer} = props
 
     return (
         <div className="flex flex-col gap-4">
@@ -158,7 +179,7 @@ const QuestionFour = (props: any) => {
                            onChange={(event) => {setRightAnswerSanskrit(event.target.value)}}/>
                 </div>
                 <div className="flex flex-col gap-2 justify-center">
-                    <div className="text-black font-bold text-xl text-center">Название на транслитерации</div>
+                    <div className="text-black font-bold text-xl text-center">Транслитерация</div>
                     <input type="text" className="w-full lg:w-1/2  m-auto border-b-2 border-black bg-light outline-0 text-center p-2"
                            onChange={(event) => {setRightTransliteration(event.target.value)}}/>
                 </div>
@@ -166,6 +187,11 @@ const QuestionFour = (props: any) => {
                     <div className="text-black font-bold text-xl text-center">Название на Русском</div>
                     <input type="text" className="w-full lg:w-1/2  m-auto border-b-2 border-black bg-light outline-0 text-center p-2"
                            onChange={(event) => {setRightAnswerRussian(event.target.value)}}/>
+                </div>
+                <div className="flex flex-col gap-2 justify-center">
+                    <div className="text-black font-bold text-xl text-center">Перевод названия</div>
+                    <input type="text" className="w-full lg:w-1/2  m-auto border-b-2 border-black bg-light outline-0 text-center p-2"
+                           onChange={(event) => {setRightAnswerRussianAlter(event.target.value)}}/>
                 </div>
             </div>
             <button
@@ -189,6 +215,7 @@ const ReviewModal = (props: PropsType) => {
     const [rightAnswerSanskrit, setRightAnswerSanskrit] = useState<string | null>(null)
     const [rightTransliteration, setRightTransliteration] = useState<string | null>(null)
     const [rightAnswerRussian, setRightAnswerRussian] = useState<string | null>(null)
+    const [rightAnswerRussianAlter, setRightAnswerRussianAlter] = useState<string | null>(null)
 
     const hostServer = process.env.NEXT_PUBLIC_HOST_SERVER;
 
@@ -201,7 +228,8 @@ const ReviewModal = (props: PropsType) => {
                     right_answer_system: rightAnswerSystem,
                     right_answer_sanskrit: rightAnswerSanskrit,
                     right_transliteration: rightTransliteration,
-                    right_answer_russian: rightAnswerRussian
+                    right_answer_russian: rightAnswerRussian,
+                    right_answer_russian_interpretation: rightAnswerRussianAlter
                 });
                 let result = await response.data
                 console.log(result)
@@ -264,7 +292,7 @@ const ReviewModal = (props: PropsType) => {
 
                     <div className="p-2">
                         <p>
-                            Данный опрос требуется, чтобы улучить качество работы нейронной сети по распознаванию асан.
+                            Данный опрос требуется, чтобы улучшить качество работы нейронной сети по распознаванию асан.
                         </p>
                     </div>
 
@@ -291,6 +319,7 @@ const ReviewModal = (props: PropsType) => {
                                 setRightAnswerSanskrit={(text: string) => {setRightAnswerSanskrit(text)}}
                                 setRightTransliteration={(text: string) => {setRightTransliteration(text)}}
                                 setRightAnswerRussian={(text: string) => {setRightAnswerRussian(text)}}
+                                setRightAnswerRussianAlter={(text: string) => {setRightAnswerRussianAlter(text)}}
                                 saveAnswer={() => {setNumberQuestion(-1)}}
                             />
                         }

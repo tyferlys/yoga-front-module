@@ -6,9 +6,11 @@ import Pose from "@/components/pose/pose";
 import Link from "next/link";
 import Cookie from "js-cookie";
 import api from "@/api";
+import {Skeleton} from "@/components/skeleton";
 
 const Profile = () => {
     const [history, setHistory] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [page, setPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
 
@@ -18,12 +20,16 @@ const Profile = () => {
 
     const fetchPredictionHistory = async (page: number) => {
         try {
+            setIsLoading(true)
             const res = await api.get(`/api/result_prediction?page=${page}&count=4&only_user_predictions=${onlyUserPredictions}`);
 
             if (res.status === 200) {
                 const data = await res.data;
-                setHistory(data.result_predictions);
-                setTotalPages(data.all_pages);
+                setTimeout(() => {
+                    setHistory(data.result_predictions);
+                    setTotalPages(data.all_pages);
+                    setIsLoading(false)
+                }, 500)
             } else {
                 console.error('Ошибка загрузки истории');
             }
@@ -43,27 +49,31 @@ const Profile = () => {
             }
 
             return (
-                <div key={prediction.id} className="bg-[#F9F9F9] p-4 mb-4 rounded-md shadow-md">
-                    <div className="flex flex-row justify-between">
-                        <div className="text-xl font-semibold text-[#9305F2]">Предсказание {prediction.id}</div>
-                        <Link className="underline text-[#9305F2] text-sm cursor-pointer"
-                              href={`/profile/result-prediction/${prediction.id}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                        >
-                            Открыть полностью
-                        </Link>
+                <div key={prediction.id} className="bg-[#F9F9F9] p-4 mb-4 rounded-md shadow-md flex flex-col justify-between">
+                    <div className="">
+                        <div className="flex flex-row justify-between ">
+                            <div className="text-xl font-semibold text-[#9305F2]">Предсказание {prediction.id}</div>
+                            <Link className="underline text-[#9305F2] text-sm cursor-pointer"
+                                  href={`/profile/result-prediction/${prediction.id}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                            >
+                                Открыть полностью
+                            </Link>
+                        </div>
+                        <p><strong>Дата:</strong> {new Date(prediction.created_at).toLocaleDateString()}</p>
+                        <p><strong>Пользователь:</strong> {prediction.user !== null ?prediction.user.login : "Незарегистрированный пользователь"}</p>
+                        <div className="mt-4 mb-4 w-2/3 m-auto">
+                            <img
+                                src={prediction.image}
+                                alt={`Предсказание ${prediction.id}`}
+                                className="w-full h-auto object-cover rounded-md"
+                            />
+                        </div>
                     </div>
-                    <p><strong>Дата:</strong> {new Date(prediction.created_at).toLocaleDateString()}</p>
-                    <p><strong>Пользователь:</strong> {prediction.user.login}</p>
-                    <div className="mt-4 mb-4 w-2/3 m-auto">
-                        <img
-                            src={prediction.image}
-                            alt={`Предсказание ${prediction.id}`}
-                            className="w-full h-auto object-cover rounded-md"
-                        />
-                    </div>
-                    <p className="text-center"><strong>Результат предсказания:</strong></p>
+
+                    <div className="text-center"><strong>Результат предсказания:</strong></div>
+
                     <div className="flex flex-row gap-3 flex-wrap mt-3 justify-center">
                         <Pose poseData={prediction.answer[0]} clickable={true} updateList={() => {}}/>
                     </div>
@@ -94,7 +104,7 @@ const Profile = () => {
 
                         <div className="flex flex-row gap-4 my-4">
                             <select className="bg-gray-100 p-2" onChange={handleSelectOnlyUserPrediction} defaultValue={`${onlyUserPredictions}`}>
-                                <option value={"true"}>Свои предсказания</option>
+                                <option value={"true"}>Мои предсказания</option>
                                 <option value={"false"}>Предсказания всех пользователей</option>
                             </select>
                         </div>
@@ -116,8 +126,19 @@ const Profile = () => {
                             </button>
                         </div>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                            {renderPredictionHistory()}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 justify-center">
+                            {
+                                !isLoading
+                                    ? renderPredictionHistory()
+                                    : (
+                                        [...Array(6 )].map((_, i) => (
+                                            <Skeleton key={i}  className="m-auto w-[90%] lg:w-[100%] h-[700px] p-4 flex flex-col items-center">
+                                                <Skeleton className="w-[80%] h-[20%] bg-gray-200"/>
+                                                <Skeleton className="w-[80%] h-[70%] bg-gray-200 mt-10"/>
+                                            </Skeleton>
+                                        ))
+                                    )
+                            }
                         </div>
 
                         <div className="flex justify-between mt-6 gap-2">
