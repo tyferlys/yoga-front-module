@@ -1,10 +1,11 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ReportModal from "@/components/report/modal-report";
 import {toast, ToastContainer} from "react-toastify";
 import Link from "next/link";
 
 export default function ReportIcon() {
     const [open, setOpen] = useState(false);
+    const [cookieToken, setCookieToken] = useState<string | null>(null);
     const hostServer = process.env.NEXT_PUBLIC_HOST_SERVER;
 
     const sendRequest = async (text: string | null) => {
@@ -27,7 +28,12 @@ export default function ReportIcon() {
         }
     }
 
-    const cookieToken = localStorage.getItem("access_token");
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const token = localStorage.getItem("access_token");
+            setCookieToken(token);
+        }
+    }, []);
 
     return (
         <>
