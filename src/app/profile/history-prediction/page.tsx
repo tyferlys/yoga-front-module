@@ -93,6 +93,7 @@ const Profile = () => {
 
     const handleSelectOnlyUserPrediction = (event: any) => {
         setOnlyUserPredictions(event.target.value == "true");
+        setPage(1)
     }
 
     return (

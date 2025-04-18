@@ -54,9 +54,11 @@ const DetectPose: React.FC = () => {
                 setResult(result.yoga_poses);
                 setIdResultPrediction(result.result_prediction_id)
 
-                setTimeout(() => {
-                    toast.warning("Если вы хотите оставить отзыв о результате распознавания, то вам следует зарегистрироваться", { position: "bottom-right" });
-                }, 1000)
+                if (cookieToken == null) {
+                    setTimeout(() => {
+                        toast.warning("Если вы хотите оставить отзыв о результате распознавания, то вам следует зарегистрироваться", { position: "bottom-right" });
+                    }, 1000)
+                }
             } else {
                 alert("Пожалуйста, загрузите изображение.");
             }
