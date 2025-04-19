@@ -68,7 +68,7 @@ const Login = () => {
                         <div className="flex justify-center">
                             <button
                                 onClick={handleLogin}
-                                className="px-2 w-1/3 py-2 bg-black text-white rounded-md"
+                                className="transition hover:scale-105 px-2 w-1/3 py-2 bg-black text-white rounded-md"
                             >
                                 Войти
                             </button>
@@ -76,11 +76,11 @@ const Login = () => {
                     </div>
                     <p className="text-center mt-4">
                         Нет аккаунта?{' '}
-                        <a href="/auth/registration" className="text-black underline">Зарегистрироваться</a>
+                        <a href="/auth/registration" className="transition hover:scale-[102%] inline-block text-black underline">Зарегистрироваться</a>
                     </p>
                     <p className="text-center mt-4">
                         Забыли пароль?{' '}
-                        <span onClick={() => {setIsModalOpen(true)}} className="text-black underline cursor-pointer">Восстановить пароль</span>
+                        <span onClick={() => {setIsModalOpen(true)}} className="transition hover:scale-[102%] inline-block text-black underline cursor-pointer">Восстановить пароль</span>
                     </p>
                 </div>
             </div>

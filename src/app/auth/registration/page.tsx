@@ -94,7 +94,7 @@ const Registration = () => {
                         {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
                         <div className="flex justify-center">
                             <button
-                                className="px-4 py-2 w-2/3 bg-black text-white rounded-md"
+                                className="transition hover:scale-105 px-4 py-2 w-2/3 bg-black text-white rounded-md"
                                 onClick={handleRegister}
                             >
                                 Зарегистрироваться
@@ -103,7 +103,7 @@ const Registration = () => {
                     </div>
                     <p className="text-center mt-4">
                         Уже есть аккаунт?{' '}
-                        <a href="/auth/login" className="black underline">Войти</a>
+                        <a href="/auth/login" className="transition hover:scale-[102%] inline-block black underline">Войти</a>
                     </p>
                 </div>
             </div>

@@ -53,7 +53,7 @@ const ResetPasswordRequestModal = (props: PropsType) => {
                             <input value={login} onChange={(event) => {setLogin(event.target.value)}} type="text" placeholder={"Введите логин или почту"} className="w-full lg:w-1/2 m-auto border-b-2 border-black bg-light outline-0 text-center p-2"/>
                             <button
                                 onClick={handleSend}
-                                className="px-2 w-1/3 py-2 bg-black text-white rounded-md m-auto"
+                                className="transition hover:scale-105 px-2 w-1/3 py-2 bg-black text-white rounded-md m-auto"
                             >
                                 Отправить
                             </button>
