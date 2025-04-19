@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import ReportModal from "@/components/report/modal-report";
 import {toast, ToastContainer} from "react-toastify";
 import Link from "next/link";
+import api from "@/api";
 
 export default function ReportIcon() {
     const [open, setOpen] = useState(false);
@@ -12,16 +13,9 @@ export default function ReportIcon() {
         setOpen(false)
 
         if (text != null){
-            const response = await fetch(`http://${hostServer}/api/reports`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ text }),
-                credentials: 'include',
-            });
+            const response = await api.post(`/api/reports`, { text });
 
-            let result = await response.json()
+            let result = await response.data
             if (response.status === 200) {
                 toast.success("Сообщение об ошибке отправлено.", { position: "bottom-right" })
             }

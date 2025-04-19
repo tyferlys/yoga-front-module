@@ -65,7 +65,7 @@ const Profile = () => {
                     {
                         userData !== null
                             ? (
-                                <div className="m-auto w-full lg:w-3/5 bg-white p-8 rounded-lg shadow-lg">
+                                <div className="m-auto w-full lg:w-4/5 bg-white p-8 rounded-lg shadow-lg">
                                 <div className="flex flex-row justify-end">
                                     <div className="text-red-600 underline cursor-pointer" onClick={handleLogout}>
                                         Выйти
@@ -100,10 +100,10 @@ const Profile = () => {
                                     </div>
                                 </div>
 
-                                <div className="flex flex-row lg:flex-col gap-2">
-                                    <div className="flex flex-row gap-2">
+                                <div className="flex flex-col w-full gap-2">
+                                    <div className="flex flex-row gap-2 w-full lg:w-1/5">
                                         <button
-                                            className={`mt-2 w-full lg:w-1/4 p-1 bg-primary text-white rounded-md ${!isChanged ? 'opacity-50' : ''}`}
+                                            className={`mt-2 p-1 w-full bg-primary text-white rounded-md ${!isChanged ? 'opacity-50' : ''}`}
                                             disabled={!isChanged}
                                             onClick={savePermissionChange}
                                         >
@@ -112,7 +112,7 @@ const Profile = () => {
                                     </div>
 
                                     <Link
-                                        className={`block text-center mt-2 w-full lg:w-1/4 p-1 bg-black text-white rounded-md`}
+                                        className={`block text-center mt-2 w-full lg:w-1/5 p-1 bg-black text-white rounded-md`}
                                         onClick={savePermissionChange}
                                         href="/profile/history-prediction"
                                     >

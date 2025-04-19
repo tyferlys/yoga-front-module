@@ -67,21 +67,21 @@ const ResultPrediction = ({ params }: { params: { id: string } }) => {
 
 
     const Review = () => {
-        if (resultPrediction?.is_right_top1){
+        if (resultPrediction?.is_right_top1 != null){
             return (
                 <div className="lg:text-xl">
                     Нейронная сеть ответила правильно
                 </div>
             )
         }
-        else if (resultPrediction?.is_right_top5){
+        else if (resultPrediction?.is_right_top5 != null){
             return (
                 <div className="lg:text-xl">
                     Нейронная сеть ответила неправильно, но среди перечня пяти наиболее вероятных ответов, есть верный
                 </div>
             )
         }
-        else if (resultPrediction?.right_answer_system){
+        else if (resultPrediction?.right_answer_system != null){
             return (
                 <div className="lg:text-xl">
                     Нейронная сеть ответила неправильно, но верный ответ есть в системе

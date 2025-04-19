@@ -46,7 +46,7 @@ const QuestionTwo = (props: any) => {
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="text-blacktext-xl">Выберите в следующем списке асан верную, если ее нет, можете пропустить</div>
+            <div className="text-black text-xl underline">Выберите в следующем списке асан верную, если ее нет, можете пропустить</div>
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 items-stretch">
                 {
                     poses.map((item: PoseType, i: any) => {
@@ -117,7 +117,7 @@ const QuestionThree = (props: any) => {
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="text-black text-xl">Выберите в следующем списке асан верную, если ее нет, можете пропустить</div>
+            <div className="text-black text-xl underline">Выберите в следующем списке асан верную, если ее нет, можете пропустить</div>
             <input value={text} onChange={(event) => {changeTextFind(event.target.value)}} type="text" className="bg-light border-b-2 border-black p-2 outline-0" placeholder="Введите название асаны"/>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 items-stretch">
                 {
@@ -171,7 +171,7 @@ const QuestionFour = (props: any) => {
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="text-black text-xl">Вы можете написать верный ответ, если не знаете оставьте поля пустыми</div>
+            <div className="text-black text-xl underline">Вы можете написать верный ответ, если не знаете оставьте поля пустыми</div>
             <div className="flex flex-col justify-center gap-4">
                 <div className="flex flex-col gap-2 justify-center">
                     <div className="text-black font-bold text-xl text-center">Название на Санскрите</div>
@@ -287,11 +287,11 @@ const ReviewModal = (props: PropsType) => {
                     </button>
 
                     <div className="text-3xl text-center text-black font-bold mb-4">
-                        Оцените результат тестирования
+                        {numberQuestion == -1 ? "Конец опроса" : "Оцените результат тестирования"}
                     </div>
 
                     <div className="p-2">
-                        <p>
+                        <p className="text-center">
                             Данный опрос требуется, чтобы улучшить качество работы нейронной сети по распознаванию асан.
                         </p>
                     </div>

@@ -77,7 +77,7 @@ const DetectPose: React.FC = () => {
             <PermissionModal isModalOpen={isModalOpen} setCookieStudy={handlerSetCookieStudy}/>
             <ReviewModal poses={result} isModalOpen={isModalOpenReview} result_prediction_id={idResultPrediction} onCloseReviewModal={() => {setIsModalOpenReview(false)}}/>
             <div className="min-h-screen bg-[#F2F2F2] flex items-center justify-center">
-                <div className="bg-white p-8 rounded-lg shadow-lg max-w-5xl w-full flex flex-col lg:flex-row items-center">
+                <div className="bg-white p-8 rounded-lg shadow-lg w-full lg:w-5/6 flex flex-col lg:flex-row items-center">
                     {/* Левая часть с загрузкой изображения */}
                     <div className="w-full lg:w-1/2 pl-6 lg:pl-0 lg:pr-6">
                         <h1 className="text-2xl font-bold text-center text-black mb-4">

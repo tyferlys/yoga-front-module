@@ -137,7 +137,7 @@ const PoseModal = (props: PropsType) => {
                                    <div className="flex flex-col gap-5">
                                        <div className="flex flex-col gap-1">
                                            <div className="text-lg">Название на Санскрите</div>
-                                           <input
+                                           <textarea
                                                onChange={(event) => {setTitleSanskrit(event.target.value)}}
                                                className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
                                                disabled={!isEdit}
@@ -146,7 +146,7 @@ const PoseModal = (props: PropsType) => {
                                        </div>
                                        <div className="flex flex-col gap-1">
                                            <div className="text-lg">Транслитерация</div>
-                                           <input
+                                           <textarea
                                                onChange={(event) => {setTitleTransliteration(event.target.value)}}
                                                className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
                                                disabled={!isEdit}
@@ -155,7 +155,7 @@ const PoseModal = (props: PropsType) => {
                                        </div>
                                        <div className="flex flex-col gap-1">
                                            <div className="text-lg">Название на Русском</div>
-                                           <input
+                                           <textarea
                                                onChange={(event) => {setTitleRussian(event.target.value)}}
                                                className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
                                                disabled={!isEdit} value={titleRussian}
@@ -163,10 +163,11 @@ const PoseModal = (props: PropsType) => {
                                        </div>
                                        <div className="flex flex-col gap-1">
                                            <div className="text-lg">Перевод названия</div>
-                                           <input
+                                           <textarea
                                                onChange={(event) => {setTitleRussianInterpretation(event.target.value)}}
                                                className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
                                                disabled={!isEdit} value={titleRussianInterpretation}
+                                               rows={4}
                                            />
                                        </div>
                                    </div>

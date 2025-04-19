@@ -50,7 +50,7 @@ export default function YogaPoseList({ isLoading, yogaPoses, updateList }: Props
             </div>
             <div className="flex flex-col items-center lg:flex-row  lg:items-stretch justify-around flex-wrap gap-4 cursor-pointer">
                 {!isLoading && openGroups
-                    ? groupedPoses[openGroups]?.map((pose, index: number) => (
+                    ? groupedPoses[openGroups]?.sort((a, b) => a.title_russian.localeCompare(b.title_russian)).map((pose, index: number) => (
                         <div key={index} className="w-full lg:w-1/3">
                             <Pose poseData={pose} clickable={true} updateList={updateList}/>
                         </div>

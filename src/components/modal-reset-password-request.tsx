@@ -47,10 +47,10 @@ const ResetPasswordRequestModal = (props: PropsType) => {
                         <div className="text-3xl text-center text-black font-bold mb-4">
                             Восстановление пароля
                         </div>
-                        <p className="text-center">Сообщние о восстновлении пароля буде отправлено на вашу почту</p>
+                        <p className="text-center">Сообщние о восстановлении пароля буде отправлено на вашу почту</p>
 
                         <div className="mt-5 flex flex-col justify-center gap-3">
-                            <input value={login} onChange={(event) => {setLogin(event.target.value)}} type="text" placeholder={"Введите логин"} className="w-full lg:w-1/2 m-auto border-b-2 border-black bg-light outline-0 text-center p-2"/>
+                            <input value={login} onChange={(event) => {setLogin(event.target.value)}} type="text" placeholder={"Введите логин или почту"} className="w-full lg:w-1/2 m-auto border-b-2 border-black bg-light outline-0 text-center p-2"/>
                             <button
                                 onClick={handleSend}
                                 className="px-2 w-1/3 py-2 bg-black text-white rounded-md m-auto"
