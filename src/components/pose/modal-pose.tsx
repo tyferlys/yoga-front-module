@@ -125,10 +125,10 @@ const PoseModal = (props: PropsType) => {
 
                            <div className="flex flex-col lg:flex-row w-11/12 m-auto">
                                <div className="w-full lg:w-1/2">
-                                   <div className="text-xl mb-4 text-center lg:text-left">Описание асаны</div>
+                                   <div className="text-xl mb-4 text-center lg:text-left font-bold underline">Описание асаны</div>
                                </div>
                                <div className="w-full lg:w-1/2">
-                                   <div className="text-xl mb-4 text-center lg:text-left">Галерея</div>
+                                   <div className="text-xl mb-4 text-center lg:text-left font-bold underline">Галерея</div>
                                </div>
                            </div>
 
@@ -142,6 +142,7 @@ const PoseModal = (props: PropsType) => {
                                                className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
                                                disabled={!isEdit}
                                                value={titleSanskrit}
+                                               rows={1}
                                            />
                                        </div>
                                        <div className="flex flex-col gap-1">
@@ -151,6 +152,7 @@ const PoseModal = (props: PropsType) => {
                                                className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
                                                disabled={!isEdit}
                                                value={titleTransliteration}
+                                               rows={1}
                                            />
                                        </div>
                                        <div className="flex flex-col gap-1">
@@ -159,6 +161,7 @@ const PoseModal = (props: PropsType) => {
                                                onChange={(event) => {setTitleRussian(event.target.value)}}
                                                className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
                                                disabled={!isEdit} value={titleRussian}
+                                               rows={1}
                                            />
                                        </div>
                                        <div className="flex flex-col gap-1">
@@ -167,7 +170,7 @@ const PoseModal = (props: PropsType) => {
                                                onChange={(event) => {setTitleRussianInterpretation(event.target.value)}}
                                                className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
                                                disabled={!isEdit} value={titleRussianInterpretation}
-                                               rows={4}
+                                               rows={3}
                                            />
                                        </div>
                                    </div>
@@ -191,7 +194,7 @@ const PoseModal = (props: PropsType) => {
                                                poseData.images.length > 0 ?
                                                    (
                                                        poseData.images.slice(indexSlider * 4, indexSlider * 4 + 4).map((imageData, index: number) => (
-                                                           <div key={index} className="flex flex-row gap-2 items-start">
+                                                           <div key={index} className="flex flex-row items-stretch gap-1 transition hover:scale-105">
                                                                <img
                                                                    key={index}
                                                                    src={imageData.image}
@@ -200,8 +203,8 @@ const PoseModal = (props: PropsType) => {
                                                                    className="rounded-xl m-auto w-full h-full"
                                                                />
                                                                {
-                                                                   isAdmin && <div className="text-lg bg-red-600 text-white p-2 rounded font-bold cursor-pointer" onClick={() => deleteImageYogaPose(imageData.id)}>
-                                                                       Х
+                                                                   isAdmin && <div className="flex flex-col justify-center transition hover:bg-red-700 text-lg bg-red-600 text-white p-2 rounded font-bold cursor-pointer" onClick={() => deleteImageYogaPose(imageData.id)}>
+                                                                       <div>Х</div>
                                                                    </div>
                                                                }
                                                            </div>
@@ -233,12 +236,12 @@ const PoseModal = (props: PropsType) => {
                                <div className="w-full lg:w-1/2 flex flex-col lg:flex-row justify-start gap-5 ">
                                    {
                                        isAdmin && (
-                                           <button className="w-full lg:w-1/3 text-center bg-black text-white font-bold rounded-xl p-2" onClick={() => {toggleEdit()}}>
+                                           <button className="transition hover:scale-105 w-full lg:w-1/3 text-center bg-black text-white font-bold rounded-xl p-2" onClick={() => {toggleEdit()}}>
                                                {isEdit?"Сохранить": "Редактировать"}
                                            </button>
                                        )
                                    }
-                                   <button onClick={onClose} className="w-full lg:w-1/3 text-center bg-red-600 text-white font-bold rounded-xl p-2">
+                                   <button onClick={onClose} className="transition hover:scale-105 w-full lg:w-1/3 text-center bg-red-600 text-white font-bold rounded-xl p-2">
                                        Закрыть
                                    </button>
                                </div>
@@ -246,7 +249,7 @@ const PoseModal = (props: PropsType) => {
                                    {
                                        isAdmin && (
                                            <>
-                                               <button className="w-1/2 text-center bg-black text-white font-bold rounded-xl p-2" onClick={() => {saveImage()}}>
+                                               <button className="transition hover:scale-105 w-1/2 text-center bg-black text-white font-bold rounded-xl p-2" onClick={() => {saveImage()}}>
                                                    Сохранить изображение
                                                </button>
                                                <input type="file" accept="image/*" onChange={handleFileChange} />

@@ -33,7 +33,7 @@ export default function AboutProject() {
                         <b>Об авторах</b>
                         <li>
                             Руководитель проекта: - <b>Шульга Татьяна Эриковна</b> (г. Саратов), доктор физ.-мат. наук, профессор, инструктор йоги, йога
-                            терапевт (<a className="underline text-secondary" href={"http://yogasaratov.ru"}>yogasaratov.ru</a>, <a className="underline text-secondary" href={"https://vk.com/tatianashulgayoga"}>tatianashulgayoga</a>)
+                            терапевт (<a className="underline px-1 text-secondary inline-block hover:scale-105 transition" href={"http://yogasaratov.ru"}>yogasaratov.ru</a>, <a className="underline px-1 text-secondary inline-block hover:scale-105 transition" href={"https://vk.com/tatianashulgayoga"}>tatianashulgayoga</a>)
                         </li>
                     </div>
                     <div className="mb-4">
@@ -41,7 +41,7 @@ export default function AboutProject() {
                         <li>
                             <b>Бабкин Сергей Александрович</b> (г. Москва), инструктор йоги и традиционных японских
                             боевых искусств, йогатерапевт и физический терапевт, практики и исследователь
-                            традиционных систем медитации (индуистская и буддийская тантра). (<a className="underline text-secondary" href={"https://heiho.ru/"}>heiho.ru</a>, <a className="underline text-secondary" href={"https://vk.com/sergey_babkin9"}>sergey_babkin9</a>)
+                            традиционных систем медитации (индуистская и буддийская тантра). (<a className="underline px-1 text-secondary inline-block hover:scale-105 transition" href={"https://heiho.ru/"}>heiho.ru</a>, <a className="underline px-1 text-secondary inline-block hover:scale-105 transition" href={"https://vk.com/sergey_babkin9"}>sergey_babkin9</a>)
                         </li>
                         <li>
                             <b>Шульга Игорь Иванович</b> (г. Саратов), кандидат исторических наук, инструктор йоги,

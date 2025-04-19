@@ -29,7 +29,7 @@ const ReportModal = (props: PropsType) => {
                     >
                     </textarea>
 
-                    <button onClick={() => {sendRequest(text)}} className="m-auto mt-6 text-center bg-primary text-white font-bold w-2/5 rounded-xl p-2">
+                    <button onClick={() => {sendRequest(text)}} className="transition hover:scale-105 m-auto mt-6 text-center bg-primary text-white font-bold w-2/5 rounded-xl p-2">
                         Отправить
                     </button>
                 </div>

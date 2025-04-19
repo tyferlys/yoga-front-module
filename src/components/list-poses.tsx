@@ -33,7 +33,7 @@ export default function YogaPoseList({ isLoading, yogaPoses, updateList }: Props
                     ? sortedLetters.map(letter => (
                         <div key={letter} className="mb-2">
                             <button
-                                className={`text-xl font-bold text-black underline ${activeLetter == letter ? "text-2xl text-red-600" : ""}`}
+                                className={`text-xl transition px-5 hover:scale-125 font-bold text-black underline ${activeLetter == letter ? "text-2xl text-red-600 scale-125" : ""}`}
                                 onClick={() => toggleGroup(letter)}
                             >
                                 {letter}

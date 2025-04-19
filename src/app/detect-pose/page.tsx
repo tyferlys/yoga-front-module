@@ -108,7 +108,7 @@ const DetectPose: React.FC = () => {
 
                         <div className="flex flex-col items-center justify-center  gap-2">
                             <button
-                                className="px-4 py-2 bg-black text-white rounded-md w-full lg:w-2/3"
+                                className="px-4 py-2 bg-black text-white rounded-md w-full lg:w-2/3 transition hover:scale-105"
                                 onClick={handleDetectPose}
                             >
                                 Начать определение

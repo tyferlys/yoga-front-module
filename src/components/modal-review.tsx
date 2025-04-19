@@ -19,19 +19,19 @@ const QuestionOne = (props: any) => {
             <div className="text-black underline text-xl">Правильно ли нейронная сеть распознала асану?</div>
             <div className="flex flex-col lg:flex-row gap-2 w-full lg:w-1/2">
                 <button
-                    className="text-center bg-primary text-white font-bold w-full lg:w-2/5 rounded-xl p-2"
+                    className="transition hover:scale-105 text-center bg-primary text-white font-bold w-full lg:w-2/5 rounded-xl p-2"
                     onClick={setTrue}
                 >
                     Да
                 </button>
                 <button
-                    className="text-center bg-red-600 text-white font-bold w-full lg:w-2/5 rounded-xl p-2"
+                    className="transition hover:scale-105 text-center bg-red-600 text-white font-bold w-full lg:w-2/5 rounded-xl p-2"
                     onClick={setFalse}
                 >
                     Нет
                 </button>
                 <button
-                    className="text-center bg-secondary text-white font-bold w-full lg:w-2/5 rounded-xl p-2"
+                    className="transition hover:scale-105 text-center bg-secondary text-white font-bold w-full lg:w-2/5 rounded-xl p-2"
                     onClick={setNull}
                 >
                     Не знаю
@@ -57,7 +57,7 @@ const QuestionTwo = (props: any) => {
                 }
             </div>
             <button
-                className="m-auto mt-4 text-center bg-red-600 text-white font-bold w-2/5 rounded-xl p-2"
+                className="transition hover:scale-105 m-auto mt-4 text-center bg-red-600 text-white font-bold w-2/5 rounded-xl p-2"
                 onClick={() => {setIdPose(null)}}
             >
                 Верного ответа нет
@@ -143,21 +143,21 @@ const QuestionThree = (props: any) => {
             <div className="flex flex-row gap-2 justify-center">
                 <button
                     disabled={page <= 1}
-                    className={`m-auto mt-4 text-center bg-secondary text-white font-bold w-2/5 rounded-xl p-2 disabled:bg-gray-300`}
+                    className={`transition hover:scale-105 m-auto mt-4 text-center bg-secondary text-white font-bold w-2/5 rounded-xl p-2 disabled:bg-gray-300`}
                     onClick={() => {changePage(page - 1)}}
                 >
                     Предыдущая страница
                 </button>
                 <button
                     disabled={page >= maxPage}
-                    className="m-auto mt-4 text-center bg-secondary text-white font-bold w-2/5 rounded-xl p-2 disabled:bg-gray-300"
+                    className="transition hover:scale-105 m-auto mt-4 text-center bg-secondary text-white font-bold w-2/5 rounded-xl p-2 disabled:bg-gray-300"
                     onClick={() => {changePage(page + 1)}}
                 >
                     Следующая страница
                 </button>
             </div>
             <button
-                className="m-auto mt-4 text-center bg-red-600 text-white font-bold w-2/5 rounded-xl p-2"
+                className="transition hover:scale-105 m-auto mt-4 text-center bg-red-600 text-white font-bold w-2/5 rounded-xl p-2"
                 onClick={() => {setIdPose(null)}}
             >
                 Верного ответа нет
@@ -195,7 +195,7 @@ const QuestionFour = (props: any) => {
                 </div>
             </div>
             <button
-                className="m-auto mt-4 text-center bg-primary text-white font-bold w-2/5 rounded-xl p-2"
+                className="transition hover:scale-105 m-auto mt-4 text-center bg-primary text-white font-bold w-2/5 rounded-xl p-2"
                 onClick={saveAnswer}
             >
                 Сохранить

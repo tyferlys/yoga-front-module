@@ -34,7 +34,7 @@ const Pose = (props: PropsType) => {
         <>
             {isModalOpen && <PoseModal isModalOpen={isModalOpen} onClose={() => {setIsModalOpen(false); updateList()}} poseDataSource={poseData}/>}
             <div
-                 className="bg-gray-100 p-4 w-full h-full rounded-xl flex flex-col justify-between"
+                 className="transition hover:scale-[102%] hover:shadow-2xl bg-gray-100 p-4 w-full h-full rounded-xl flex flex-col justify-between"
                  onClick={() => {setIsModalOpen(true)}}
             >
                 <div className="text-xl text-bla underlineck mb-4 text-center">

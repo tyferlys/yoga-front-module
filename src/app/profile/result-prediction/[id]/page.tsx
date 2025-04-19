@@ -142,7 +142,7 @@ const ResultPrediction = ({ params }: { params: { id: string } }) => {
                                             <div className="flex flex-col gap-3">
                                                 <Review/>
                                                 <button
-                                                    className="w-full lg:w-1/6 ml-0 text-white bg-primary p-2 rounded-md font-bold"
+                                                    className="transition hover:scale-105 w-full lg:w-1/6 ml-0 text-white bg-primary p-2 rounded-md font-bold"
                                                     onClick={() => {setIsModalOpen(true)}}
                                                 >
                                                     Изменить отзыв

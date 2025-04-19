@@ -49,11 +49,11 @@ const Profile = () => {
             }
 
             return (
-                <div key={prediction.id} className="bg-[#F9F9F9] p-4 mb-4 rounded-md shadow-md flex flex-col justify-between">
+                <div key={prediction.id} className="hover:shadow-2xl transition hover:scale-[102%] bg-[#F9F9F9] p-4 mb-4 rounded-md shadow-md flex flex-col justify-between">
                     <div className="">
                         <div className="flex flex-row justify-between ">
                             <div className="text-xl font-semibold text-[#9305F2]">Предсказание {prediction.id}</div>
-                            <Link className="underline text-[#9305F2] text-sm cursor-pointer"
+                            <Link className="transition hover:scale-105 underline text-[#9305F2] text-sm cursor-pointer"
                                   href={`/profile/result-prediction/${prediction.id}`}
                                   target="_blank"
                                   rel="noopener noreferrer"
@@ -114,14 +114,14 @@ const Profile = () => {
                             <button
                                 onClick={() => handlePageChange(page - 1)}
                                 disabled={page <= 1}
-                                className="px-4 py-2 bg-[#C763F2] text-white rounded-md hover:bg-[#9305F2] disabled:bg-gray-300"
+                                className="transition hover:scale-105 px-4 py-2 bg-[#C763F2] text-white rounded-md hover:bg-[#9305F2] disabled:bg-gray-300"
                             >
                                 Предыдущая страница
                             </button>
                             <button
                                 onClick={() => handlePageChange(page + 1)}
                                 disabled={page >= totalPages}
-                                className="px-4 py-2 bg-[#C763F2] text-white rounded-md hover:bg-[#9305F2] disabled:bg-gray-300"
+                                className="transition hover:scale-105 px-4 py-2 bg-[#C763F2] text-white rounded-md hover:bg-[#9305F2] disabled:bg-gray-300"
                             >
                                 Следующая страница
                             </button>
@@ -146,14 +146,14 @@ const Profile = () => {
                             <button
                                 onClick={() => handlePageChange(page - 1)}
                                 disabled={page <= 1}
-                                className="px-4 py-2 bg-[#C763F2] text-white rounded-md hover:bg-[#9305F2] disabled:bg-gray-300"
+                                className="transition hover:scale-105 px-4 py-2 bg-[#C763F2] text-white rounded-md hover:bg-[#9305F2] disabled:bg-gray-300"
                             >
                                 Предыдущая страница
                             </button>
                             <button
                                 onClick={() => handlePageChange(page + 1)}
                                 disabled={page >= totalPages}
-                                className="px-4 py-2 bg-[#C763F2] text-white rounded-md hover:bg-[#9305F2] disabled:bg-gray-300"
+                                className="transition hover:scale-105 px-4 py-2 bg-[#C763F2] text-white rounded-md hover:bg-[#9305F2] disabled:bg-gray-300"
                             >
                                 Следующая страница
                             </button>

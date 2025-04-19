@@ -32,11 +32,11 @@ const PermissionModal = (props: PropsType) => {
                     </div>
 
                     <button onClick={() => {setCookieStudy("true")}}
-                            className="t text-center bg-primary text-white font-bold mt-8 w-2/5 m-auto rounded-xl p-2">
+                            className="transition hover:scale-105 text-center bg-primary text-white font-bold mt-8 w-2/5 m-auto rounded-xl p-2">
                         Разрешить
                     </button>
                     <button onClick={() => {setCookieStudy("false")}}
-                            className="t text-center bg-red-600 text-white font-bold mt-4 w-2/5 m-auto rounded-xl p-2">
+                            className="transition hover:scale-105 text-center bg-red-600 text-white font-bold mt-4 w-2/5 m-auto rounded-xl p-2">
                         Запретить
                     </button>
                 </div>

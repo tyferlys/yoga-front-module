@@ -33,7 +33,7 @@ export default function ReportIcon() {
         <>
             <ReportModal isModalOpen={open} sendRequest={sendRequest}/>
             <ToastContainer position="bottom-right" autoClose={3000} />
-            <div className="fixed bottom-10 right-10">
+            <div className="fixed bottom-10 right-10 transition hover:scale-105">
                 {cookieToken ? (
                         <button
                             onClick={() => setOpen(!open)}
