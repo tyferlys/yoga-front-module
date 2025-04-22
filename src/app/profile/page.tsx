@@ -61,11 +61,11 @@ const Profile = () => {
     return (
         <>
             <div className="bg-gray-100">
-                <div className="min-h-screen w-11/12 m-auto flex flex-row gap-5 p-4">
+                <div className="min-h-screen w-11/12 m-auto flex flex-col gap-5 p-4">
                     {
                         userData !== null
-                            ? (
-                                <div className="m-auto w-full lg:w-4/5 bg-white p-8 rounded-lg shadow-lg">
+                        ? (
+                            <div className="m-auto w-full lg:w-4/5 bg-white p-8 rounded-lg shadow-lg">
                                 <div className="flex flex-row justify-end">
                                     <div className="transition hover:scale-105 text-red-600 underline cursor-pointer" onClick={handleLogout}>
                                         Выйти
@@ -118,20 +118,33 @@ const Profile = () => {
                                     >
                                         История предсказаний
                                     </Link>
+
+                                    {
+                                        userData.is_admin && (
+                                            <div className="mt-10">
+                                                <h1 className="m-auto text-2xl font-bold text-center text-black mb-4">Администрирование</h1>
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    <Link href={"/"} className="w-full text-center block bg-gray-400 text-white rounded-md py-2 px-4 transition">Просмотр заявок на предоставление прав администратора (В разработке)</Link>
+                                                    <Link href={"/"} className="w-full text-center  block bg-gray-400 text-white rounded-md py-2 px-4 transition">Генерация отчетов о результатах предсказаний (В разработке)</Link>
+                                                    <Link href={"/"} className="w-full text-center  block bg-gray-400 text-white rounded-md py-2 px-4 transition">Редактирование данных пользователей (В разработке)</Link>
+                                                </div>
+                                            </div>
+                                        )
+                                    }
                                 </div>
                             </div>
-                            )
-                            : (
-                                <Skeleton className="m-auto w-full h-[450px] lg:w-3/5 p-8 rounded-lg shadow-lg bg-white">
-                                    <Skeleton className="m-auto w-[40%] h-[50px] bg-gray-100"/>
+                        )
+                        : (
+                            <Skeleton className="m-auto w-full h-[450px] lg:w-4/5 p-8 rounded-lg shadow-lg bg-white">
+                                <Skeleton className="m-auto w-[40%] h-[50px] bg-gray-100"/>
 
-                                    <div className="flex flex-col gap-4 mt-20">
-                                        <Skeleton className="w-[40%] h-[50px] bg-gray-100"/>
-                                        <Skeleton className="w-[40%] h-[50px] bg-gray-100"/>
-                                        <Skeleton className="w-[40%] h-[50px] bg-gray-100"/>
-                                    </div>
-                                </Skeleton>
-                            )
+                                <div className="flex flex-col gap-4 mt-20">
+                                    <Skeleton className="w-[40%] h-[50px] bg-gray-100"/>
+                                    <Skeleton className="w-[40%] h-[50px] bg-gray-100"/>
+                                    <Skeleton className="w-[40%] h-[50px] bg-gray-100"/>
+                                </div>
+                            </Skeleton>
+                        )
                     }
                 </div>
             </div>
