@@ -139,7 +139,7 @@ const PoseModal = (props: PropsType) => {
                                            <div className="text-lg">Название на Санскрите</div>
                                            <textarea
                                                onChange={(event) => {setTitleSanskrit(event.target.value)}}
-                                               className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
+                                               className={`resize-none w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
                                                disabled={!isEdit}
                                                value={titleSanskrit}
                                                rows={1}
@@ -149,7 +149,7 @@ const PoseModal = (props: PropsType) => {
                                            <div className="text-lg">Транслитерация</div>
                                            <textarea
                                                onChange={(event) => {setTitleTransliteration(event.target.value)}}
-                                               className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
+                                               className={`resize-none w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
                                                disabled={!isEdit}
                                                value={titleTransliteration}
                                                rows={1}
@@ -159,7 +159,7 @@ const PoseModal = (props: PropsType) => {
                                            <div className="text-lg">Название на Русском</div>
                                            <textarea
                                                onChange={(event) => {setTitleRussian(event.target.value)}}
-                                               className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
+                                               className={`resize-none w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
                                                disabled={!isEdit} value={titleRussian}
                                                rows={1}
                                            />
@@ -168,7 +168,7 @@ const PoseModal = (props: PropsType) => {
                                            <div className="text-lg">Перевод названия</div>
                                            <textarea
                                                onChange={(event) => {setTitleRussianInterpretation(event.target.value)}}
-                                               className={`w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
+                                               className={`resize-none w-full text-lg text-secondary bg-white ${isEdit?"border-black border-b-2 outline-none":""}`}
                                                disabled={!isEdit} value={titleRussianInterpretation}
                                                rows={3}
                                            />

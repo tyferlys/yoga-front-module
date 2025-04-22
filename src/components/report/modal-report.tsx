@@ -25,7 +25,7 @@ const ReportModal = (props: PropsType) => {
 
                     <textarea
                         onChange={(event) => {setText(event.target.value)} }
-                        className="outline-0 bg-gray-100 p-2" rows={10} placeholder="Введите текст ошибки"
+                        className="resize-none outline-0 bg-gray-100 p-2" rows={10} placeholder="Введите текст ошибки"
                     >
                     </textarea>
 
