@@ -125,11 +125,11 @@ const ResultPrediction = ({ params }: { params: { id: string } }) => {
                                             className="m-auto w-full lg:w-1/2 object-cover rounded-md"
                                         />
                                         <div className="text-left text-xl lg:text-3xl text-primary">Результат:</div>
-                                        <div className="flex flex-col gap-10 w-full lg:w-2/3 m-auto">
-                                            <div className="m-auto">
+                                        <div className="flex flex-col gap-10 w-full  m-auto">
+                                            <div className="m-auto w-1/2">
                                                 {resultPrediction?.answer[0] && <Pose poseData={resultPrediction?.answer[0]} clickable={true} updateList={() => {}}/>}
                                             </div>
-                                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                                            <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
                                                 {
                                                     resultPrediction?.answer.slice(1,).map((item: any, index: number) => {
                                                         return <Pose key={index} poseData={item} clickable={true} updateList={() => {}}/>
