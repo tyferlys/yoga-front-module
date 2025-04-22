@@ -15,6 +15,7 @@ const Profile = () => {
     const [totalPages, setTotalPages] = useState<number>(1);
 
     const [onlyUserPredictions, setOnlyUserPredictions] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(null);
 
     const router = useRouter();
 
@@ -22,12 +23,15 @@ const Profile = () => {
         try {
             setIsLoading(true)
             const res = await api.get(`/api/result_prediction?page=${page}&count=4&only_user_predictions=${onlyUserPredictions}`);
+            const res_user = await api.get(`/api/users/me`);
 
             if (res.status === 200) {
                 const data = await res.data;
+                const data_user = await res_user.data
                 setTimeout(() => {
                     setHistory(data.result_predictions);
                     setTotalPages(data.all_pages);
+                    setIsAdmin(data_user.is_admin)
                     setIsLoading(false)
                 }, 500)
             } else {
@@ -103,12 +107,14 @@ const Profile = () => {
                     <div className="m-auto w-full lg:w-3/5 bg-white p-8 rounded-lg shadow-lg">
                         <h1 className="m-auto text-2xl font-bold text-center text-black mb-4">История предсказаний</h1>
 
-                        <div className="flex flex-row gap-4 my-4">
-                            <select className="bg-gray-100 p-2" onChange={handleSelectOnlyUserPrediction} defaultValue={`${onlyUserPredictions}`}>
-                                <option value={"true"}>Мои предсказания</option>
-                                <option value={"false"}>Предсказания всех пользователей</option>
-                            </select>
-                        </div>
+                        {isAdmin && (
+                            <div className="flex flex-row gap-4 my-4">
+                                <select className="bg-gray-100 p-2" onChange={handleSelectOnlyUserPrediction} defaultValue={`${onlyUserPredictions}`}>
+                                    <option value={"true"}>Мои предсказания</option>
+                                    <option value={"false"}>Предсказания всех пользователей</option>
+                                </select>
+                            </div>
+                        )}
 
                         <div className="flex justify-between mb-6 gap-2">
                             <button
@@ -142,22 +148,30 @@ const Profile = () => {
                             }
                         </div>
 
-                        <div className="flex justify-between mt-6 gap-2">
-                            <button
-                                onClick={() => handlePageChange(page - 1)}
-                                disabled={page <= 1}
-                                className="transition hover:scale-105 px-4 py-2 bg-[#C763F2] text-white rounded-md hover:bg-[#9305F2] disabled:bg-gray-300"
-                            >
-                                Предыдущая страница
-                            </button>
-                            <button
-                                onClick={() => handlePageChange(page + 1)}
-                                disabled={page >= totalPages}
-                                className="transition hover:scale-105 px-4 py-2 bg-[#C763F2] text-white rounded-md hover:bg-[#9305F2] disabled:bg-gray-300"
-                            >
-                                Следующая страница
-                            </button>
-                        </div>
+                        {totalPages == 0 && (
+                            <div className="text-xl text-center">
+                                На вашем аккаунте пока нет предсказаний
+                            </div>
+                        )}
+
+                        {totalPages >= 4 && (
+                            <div className="flex justify-between mt-6 gap-2">
+                                <button
+                                    onClick={() => handlePageChange(page - 1)}
+                                    disabled={page <= 1}
+                                    className="transition hover:scale-105 px-4 py-2 bg-[#C763F2] text-white rounded-md hover:bg-[#9305F2] disabled:bg-gray-300"
+                                >
+                                    Предыдущая страница
+                                </button>
+                                <button
+                                    onClick={() => handlePageChange(page + 1)}
+                                    disabled={page >= totalPages}
+                                    className="transition hover:scale-105 px-4 py-2 bg-[#C763F2] text-white rounded-md hover:bg-[#9305F2] disabled:bg-gray-300"
+                                >
+                                    Следующая страница
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
