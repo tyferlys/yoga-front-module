@@ -134,7 +134,7 @@ const PoseModal = (props: PropsType) => {
 
                            <div className="flex flex-col lg:flex-row items-center w-11/12 m-auto">
                                <div className="w-full lg:w-1/2">
-                                   <div className="flex flex-col gap-5">
+                                   <div className="flex flex-col gap-5 pr-8">
                                        <div className="flex flex-col gap-1">
                                            <div className="text-lg">Название на Санскрите</div>
                                            <textarea
