@@ -43,7 +43,7 @@ const Login = () => {
                     <h1 className="text-2xl font-bold text-center text-black mb-4">Авторизация</h1>
                     <div>
                         <div className="mb-4">
-                            <label htmlFor="login" className="block text-sm font-medium text-[#333]">Логин</label>
+                            <label htmlFor="login" className="block text-sm font-medium text-[#333]">Логин или почта</label>
                             <input
                                 type="text"
                                 id="login"

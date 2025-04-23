@@ -54,7 +54,7 @@ const DetectPose: React.FC = () => {
                 setResult(result.yoga_poses);
                 setIdResultPrediction(result.result_prediction_id)
 
-                if (cookieToken == null) {
+                if (cookieToken == null && cookieStudy == null) {
                     setTimeout(() => {
                         toast.warning("Если вы хотите оставить отзыв о результате распознавания, то вам следует зарегистрироваться", { position: "bottom-right" });
                     }, 1000)
