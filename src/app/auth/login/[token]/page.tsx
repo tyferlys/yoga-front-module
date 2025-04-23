@@ -1,6 +1,6 @@
 'use client';
 
-import {use, useEffect, useState} from 'react';
+import React, {Suspense, use, useEffect, useState} from 'react';
 import {useRouter} from "next/navigation";
 import Cookie from "js-cookie";
 import axios from "axios";
@@ -109,4 +109,5 @@ const Login = ({ params }: { params: { token: string } }) => {
     );
 };
 
-export default Login;
+const LoginWithSuspense = (props: any) => {return <Suspense fallback={""}><Login {...props}/></Suspense>}
+export default LoginWithSuspense;
