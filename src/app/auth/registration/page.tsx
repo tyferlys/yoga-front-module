@@ -32,11 +32,10 @@ const Registration = () => {
                 setTimeout(() => {
                     router.push('/auth/login');
                 }, 5000)
-            } else {
-                setError(data.message || 'Ошибка регистрации');
             }
         } catch (error) {
-            setError('Что-то пошло не так');
+            // @ts-ignore
+            setError(error.response.data.detail || 'Что-то пошло не так');
         }
     };
 

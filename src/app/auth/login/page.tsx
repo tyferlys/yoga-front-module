@@ -26,10 +26,11 @@ const Login = () => {
                 localStorage.setItem("access_token", data.access_token)
                 window.location.href = "/detect-pose"
             } else {
-                setError(data.message || 'Ошибка авторизации');
+                setError(data.detail || 'Ошибка авторизации');
             }
         } catch (error) {
-            setError('Что-то пошло не так');
+            // @ts-ignore
+            setError(error.response.data.detail || 'Ошибка авторизации');
         }
     };
 
