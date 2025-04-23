@@ -108,8 +108,8 @@ const Profile = () => {
                         <h1 className="m-auto text-2xl font-bold text-center text-black mb-4">История предсказаний</h1>
 
                         {isAdmin && (
-                            <div className="flex flex-row gap-4 my-4">
-                                <select className="bg-gray-100 p-2" onChange={handleSelectOnlyUserPrediction} defaultValue={`${onlyUserPredictions}`}>
+                            <div className="flex flex-row justify-center lg:justify-start gap-4 my-4">
+                                <select className="block bg-gray-100 p-2" onChange={handleSelectOnlyUserPrediction} defaultValue={`${onlyUserPredictions}`}>
                                     <option value={"true"}>Мои предсказания</option>
                                     <option value={"false"}>Предсказания всех пользователей</option>
                                 </select>
