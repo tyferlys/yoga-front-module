@@ -19,7 +19,7 @@ const Login = ({ params }: { params: { token: string } }) => {
 
     const verifyToken = async () => {
         try {
-            const response = await api.get(`/api/auth/${token}`);
+            const response = await api.get(`/api/auth/verify/${token}`);
             if (response.status === 200) {
                 toast.success("Аккаунт успешно подтвержден")
             }
