@@ -125,7 +125,7 @@ const Profile = () => {
                                                 <h1 className="m-auto text-2xl font-bold text-center text-black mb-4">Администрирование</h1>
                                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                                                     <Link href={"/"} className="w-full text-center block bg-gray-400 text-white rounded-md py-2 px-4 transition">Просмотр заявок на предоставление прав администратора (В разработке)</Link>
-                                                    <Link href={"/"} className="w-full text-center  block bg-gray-400 text-white rounded-md py-2 px-4 transition">Генерация отчетов о результатах предсказаний (В разработке)</Link>
+                                                    <Link href={"/profile/rept"} className="w-full text-center  block bg-black text-white rounded-md py-2 px-4 transition hover:scale-[102%]">Генерация отчетов о результатах предсказаний</Link>
                                                     <Link href={"/"} className="w-full text-center  block bg-gray-400 text-white rounded-md py-2 px-4 transition">Редактирование данных пользователей (В разработке)</Link>
                                                 </div>
                                             </div>
